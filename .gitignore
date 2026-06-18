@@ -1,0 +1,6 @@
+# Release-repo .gitignore (Goal-to-Spec Kit)
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db

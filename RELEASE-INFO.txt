@@ -1,0 +1,5 @@
+JGS Goal-to-Spec Kit — External Release
+Version:    1.0.0
+Tag:        v1.0.0 (apply to the external repo after staging)
+Staged:     2026-06-18T23:17:49.412719+00:00
+Vendor:     JG Systems Consulting Ltd.

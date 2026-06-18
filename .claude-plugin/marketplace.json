@@ -1,0 +1,12 @@
+{
+  "name": "jgs-goal-spec",
+  "description": "JG Systems Consulting goal-to-spec skills: turn a rough idea into a hardened engineering spec.",
+  "owner": { "name": "JG Systems Consulting Ltd.", "url": "https://github.com/jgsystemsconsulting/jgs-goal-spec" },
+  "plugins": [
+    {
+      "name": "jgs-goal-spec",
+      "source": "./",
+      "description": "goal-formatter -> goal-spec -> spec-review skills pack"
+    }
+  ]
+}
