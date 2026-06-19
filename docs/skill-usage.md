@@ -19,16 +19,16 @@ dependency. They are pure prompt-engineering workflows that work with any model 
 
 ## The chain at a glance
 
-```
-ROUGH IDEA
-   │
-   ▼  /goal-formatter   →  structured, testable GOAL  (+ optional draft spec)
-   │
-   ▼  /goal-spec        →  complete SPEC  (gaps resolved by targeted questions)
-   │
-   ▼  /spec-review      →  HARDENED SPEC  (autonomous multi-discipline review to convergence)
-   │
-   ▼  EXECUTE           →  hand goal + spec to your executor of choice
+```mermaid
+flowchart TD
+    A([Rough idea]) --> B["/goal-formatter"]
+    B -->|"structured, testable goal"| C["/goal-spec"]
+    C -->|"complete spec — gaps resolved by targeted questions"| D["/spec-review"]
+    D -->|"hardened spec — autonomous multi-discipline review"| E([Execute with your executor of choice])
+    classDef skill fill:#16171a,stroke:#3a3e46,color:#e8ebf0;
+    classDef bookend fill:#f4f2ec,stroke:#f4f2ec,color:#0a0a0b;
+    class B,C,D skill;
+    class A,E bookend;
 ```
 
 Each skill is independently useful, and they hand off cleanly because all three share one
@@ -68,6 +68,7 @@ summary at the end.
 
 Invoke with: "Review this spec", "harden this spec", "run the roundtable on this spec."
 
+> [!NOTE]
 > If your client doesn't support subagents, spec-review can run the personas inline (one model
 > voicing each discipline) — faster, but with less genuine independence between reviewers.
 

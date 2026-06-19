@@ -12,24 +12,25 @@ See LICENSE for terms.
 A small, composable suite of Claude Code skills that turn a rough idea into a **hardened
 engineering specification — ready to execute**. Three skills chain together:
 
-```
-ROUGH IDEA
-   │
-   ▼  goal-formatter   →  a structured, testable GOAL (+ optional draft spec)
-   │
-   ▼  goal-spec        →  a complete SPEC (gaps resolved by asking you targeted questions)
-   │
-   ▼  spec-review      →  a HARDENED SPEC (autonomous multi-discipline review to convergence)
-   │
-   ▼  EXECUTE          →  hand the goal + hardened spec to your executor of choice
+```mermaid
+flowchart TD
+    A([Rough idea]) --> B["/goal-formatter"]
+    B -->|"structured, testable goal"| C["/goal-spec"]
+    C -->|"complete spec — gaps resolved by targeted questions"| D["/spec-review"]
+    D -->|"hardened spec — autonomous multi-discipline review"| E([Execute with your executor of choice])
+    classDef skill fill:#16171a,stroke:#3a3e46,color:#e8ebf0;
+    classDef bookend fill:#f4f2ec,stroke:#f4f2ec,color:#0a0a0b;
+    class B,C,D skill;
+    class A,E bookend;
 ```
 
 The pack's job is to get you to a spec you can **trust enough to build from**. The skills do not
 implement the spec themselves — execution is a separate, deliberate next step (see
 "Then execute it" below). Authoring once and executing many ways is the point.
 
-These skills are **tool-agnostic**: they have no external dependencies, call no MCP server, and
-work with any model or agent framework. They are pure prompt-engineering workflows.
+> [!NOTE]
+> These skills are **tool-agnostic**: no external dependencies, no MCP server — pure
+> prompt-engineering workflows that work with any model or agent framework.
 
 ---
 
