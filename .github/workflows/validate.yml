@@ -16,7 +16,8 @@ jobs:
           set -e
           fail=0
           for s in "CONFIDENTIAL" "BEGIN PRIVATE KEY" "BEGIN OPENSSH PRIVATE KEY"; do
-            if grep -rIl --exclude-dir=.git "$s" . ; then
+            # Exclude .github/ — this workflow lists the sentinels as grep targets.
+            if grep -rIl --exclude-dir=.git --exclude-dir=.github "$s" . ; then
               echo "::error::forbidden content found: $s"; fail=1
             fi
           done
