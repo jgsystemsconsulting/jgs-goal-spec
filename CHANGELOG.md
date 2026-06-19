@@ -12,6 +12,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] — 2026-06-19
+
+Multi-agent install.
+
+### Added
+- **Multi-agent installer.** `install.py` now installs into any of Claude Code, Cursor,
+  Codex CLI, or Gemini CLI — `--agent <name>`, `--all`, or auto-detect installed agents.
+  The same `SKILL.md` folders work unmodified across all of them (agentskills.io format).
+- README "Installation & Invocation" documents the per-agent skill directories.
+
 ## [1.1.0] — 2026-06-19
 
 Open-sourced under the MIT License.

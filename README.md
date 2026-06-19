@@ -5,7 +5,7 @@ See LICENSE for terms.
 
 # JGS Goal-to-Spec Kit
 
-![License](https://img.shields.io/badge/license-MIT-blue) ![Version](https://img.shields.io/badge/version-1.1.0-green) ![Skills](https://img.shields.io/badge/skills-3-orange) ![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-8A2BE2)
+![License](https://img.shields.io/badge/license-MIT-blue) ![Version](https://img.shields.io/badge/version-1.2.0-green) ![Skills](https://img.shields.io/badge/skills-3-orange) ![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-8A2BE2)
 
 **Copyright (c) 2026 JG Systems Consulting Ltd. — MIT License (see LICENSE).**
 
@@ -42,7 +42,7 @@ Copy everything in the block below and paste it into your coding agent
 You are installing jgs-goal-spec, an open-source (MIT) Claude Code skills pack
 (JG Systems Consulting Ltd.) that turns a rough idea into a hardened engineering
 spec via three chained skills (goal-formatter → goal-spec → spec-review).
-Repository: https://github.com/jgsystemsconsulting/jgs-goal-spec (version 1.1.0). Do this in order:
+Repository: https://github.com/jgsystemsconsulting/jgs-goal-spec (version 1.2.0). Do this in order:
 
 1. Read README.md, docs/skill-usage.md, and CHANGELOG.md so you understand what
    you are installing. There are NO external prerequisites — these skills call no
@@ -68,8 +68,7 @@ skills/goal-formatter/                 Idea → structured, testable goal (+ opt
 skills/goal-spec/                      Goal → complete spec (asks gap-filling questions)
 skills/spec-review/                    Spec → hardened spec (autonomous multi-discipline review)
 docs/
-  ├── skill-usage.md                   How to invoke and chain the skills, and how to execute the result
-  └── other-agents.md                  Installing the kit into Codex, Gemini, Cursor, OpenClaw, Copilot CLI
+  └── skill-usage.md                   How to invoke and chain the skills, and how to execute the result
 ```
 
 ---
@@ -98,21 +97,17 @@ Skills are namespaced when installed this way — invoke them as
 **Option B — Installer script:**
 
 ```bash
-python install.py        # or ./install.sh  /  .\install.ps1
+python install.py        # Claude Code (default); or ./install.sh / .\install.ps1
 ```
 
 Installs into `~/.claude/skills/jgs-goal-spec/`; invoke flat as `/goal-formatter`,
-`/goal-spec`, `/spec-review`.
+`/goal-spec`, `/spec-review`. Restart Claude Code after installing.
 
-Restart Claude Code after installing.
+### Use with other agents
 
----
-
-## Use with other agents
-
-These skills aren't Claude-only. Because they're pure prompt workflows in the portable
-`SKILL.md` format, the installer can target several agents — some read `SKILL.md`
-natively, others get an automatic format transform:
+These skills aren't Claude-only. Because they're pure prompt workflows in the portable `SKILL.md`
+format, the installer can target several agents — some read `SKILL.md` natively, others get an
+automatic format transform:
 
 ```bash
 python install.py --list-agents       # show every target and where it installs
@@ -130,9 +125,9 @@ python install.py --agent all          # all user-global agents
 | Gemini CLI | `gemini` | → `~/.gemini/commands/*.toml` | `/jgs-goal-spec:goal-formatter` |
 | Cursor *(project-local)* | `cursor` | → `./.cursor/rules/*.mdc` | `@goal-formatter` |
 
-Transform targets keep the full workflow: any reference files (e.g. `goal-spec`'s spec
-template) are inlined so each generated prompt is self-contained. Full details, paths, and
-limitations: see [docs/other-agents.md](docs/other-agents.md).
+Transform targets keep the full workflow: any reference files (e.g. `goal-spec`'s spec template)
+are inlined so each generated prompt is self-contained. Full details, paths, and limitations: see
+[docs/other-agents.md](docs/other-agents.md).
 
 ---
 
