@@ -10,3 +10,8 @@ Thumbs.db
 
 # Local working notes (not for public distribution)
 PUBLISHING.md
+
+# Generated logo rasters (upload artifacts; SVG source is docs/logo.svg)
+jgs-logo-*.png
+jgs-logo-*.jpg
+jgs-logo-*.gif
