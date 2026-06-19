@@ -68,7 +68,8 @@ skills/goal-formatter/                 Idea → structured, testable goal (+ opt
 skills/goal-spec/                      Goal → complete spec (asks gap-filling questions)
 skills/spec-review/                    Spec → hardened spec (autonomous multi-discipline review)
 docs/
-  └── skill-usage.md                   How to invoke and chain the skills, and how to execute the result
+  ├── skill-usage.md                   How to invoke and chain the skills, and how to execute the result
+  └── other-agents.md                  Installing the kit into Codex, Gemini, Cursor, OpenClaw, Copilot CLI
 ```
 
 ---
@@ -104,6 +105,34 @@ Installs into `~/.claude/skills/jgs-goal-spec/`; invoke flat as `/goal-formatter
 `/goal-spec`, `/spec-review`.
 
 Restart Claude Code after installing.
+
+---
+
+## Use with other agents
+
+These skills aren't Claude-only. Because they're pure prompt workflows in the portable
+`SKILL.md` format, the installer can target several agents — some read `SKILL.md`
+natively, others get an automatic format transform:
+
+```bash
+python install.py --list-agents       # show every target and where it installs
+python install.py --agent openclaw     # SKILL.md-native: copied unchanged
+python install.py --agent gemini       # transformed to that agent's format
+python install.py --agent all          # all user-global agents
+```
+
+| Agent | `--agent` | How it's installed | Invoke as |
+|---|---|---|---|
+| Claude Code *(default)* | `claude` | `SKILL.md` copied | `/goal-formatter` |
+| OpenClaw | `openclaw` | `SKILL.md` copied | `/goal-formatter` |
+| GitHub Copilot CLI | `copilot` | `SKILL.md` copied | `/goal-formatter` (then `/skills reload`) |
+| OpenAI Codex CLI | `codex` | → `~/.codex/prompts/*.md` | `/prompts:goal-formatter` |
+| Gemini CLI | `gemini` | → `~/.gemini/commands/*.toml` | `/jgs-goal-spec:goal-formatter` |
+| Cursor *(project-local)* | `cursor` | → `./.cursor/rules/*.mdc` | `@goal-formatter` |
+
+Transform targets keep the full workflow: any reference files (e.g. `goal-spec`'s spec
+template) are inlined so each generated prompt is self-contained. Full details, paths, and
+limitations: see [docs/other-agents.md](docs/other-agents.md).
 
 ---
 
