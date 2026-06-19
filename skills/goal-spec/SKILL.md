@@ -4,8 +4,8 @@ description: Turn a goal (or a goal + draft spec) into a complete, detailed engi
 compatibility: Git, repo read access, AskUserQuestion (for clarifying questions)
 ---
 <!--
-Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
-See LICENSE for terms.
+Copyright (c) 2026 JG Systems Consulting Ltd.
+MIT License — see LICENSE.
 -->
 
 

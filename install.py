@@ -1,12 +1,9 @@
-# Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+# Copyright (c) 2026 JG Systems Consulting Ltd. — MIT License (see LICENSE).
 #
-# This file is part of the JGS Goal-to-Spec Kit, proprietary software of
-# JG Systems Consulting Ltd. Unauthorized copying, modification,
-# distribution, reverse engineering, or use of this file, via any medium,
-# is strictly prohibited without a valid written licence from JG Systems
-# Consulting Ltd. See LICENSE for the full terms.
+# This file is part of the jgs-goal-spec kit, open-source software of
+# JG Systems Consulting Ltd., released under the MIT License. See LICENSE.
 #
-# SPDX-License-Identifier: LicenseRef-JGSystemsConsulting-Proprietary
+# SPDX-License-Identifier: MIT
 """Installer for the JGS Goal-to-Spec Kit (Claude Code skills).
 
 Copies the three skill directories in this release into the user's Claude Code

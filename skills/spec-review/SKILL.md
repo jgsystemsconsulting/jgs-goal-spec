@@ -4,8 +4,8 @@ description: Autonomously harden an engineering specification through a roundtab
 compatibility: Agent tool (spawns reviewer subagents), file read/write for the spec + triage log
 ---
 <!--
-Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
-See LICENSE for terms.
+Copyright (c) 2026 JG Systems Consulting Ltd.
+MIT License — see LICENSE.
 -->
 
 

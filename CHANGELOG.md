@@ -1,6 +1,6 @@
 <!--
-Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
-See LICENSE for terms.
+Copyright (c) 2026 JG Systems Consulting Ltd.
+MIT License — see LICENSE.
 -->
 
 # Changelog
@@ -11,6 +11,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+
+## [1.1.0] — 2026-06-19
+
+Open-sourced under the MIT License.
+
+### Changed
+- **License: MIT.** The pack is now open source. `LICENSE` is the MIT License; `plugin.json`
+  `license` is `MIT`; all proprietary/EULA language removed from README, SECURITY, and installers.
+
+### Added
+- `CONTRIBUTING.md` — how to report issues and submit pull requests.
+- `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1.
+
+### Removed
+- Proprietary `COPYRIGHT` and `NOTICE` files (superseded by the MIT `LICENSE`).
 
 ## [1.0.0] — 2026-06-18
 
@@ -72,4 +87,4 @@ Initial external release of the Goal-to-Spec Kit.
 ### Notes
 
 - These skills have no external runtime dependencies — they call no MCP server and require no
-  licence tier at call time. The pack itself is proprietary software under LICENSE.
+  licence tier at call time. The pack is released under the MIT License.

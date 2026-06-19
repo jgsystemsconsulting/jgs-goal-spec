@@ -1,6 +1,6 @@
 <!--
-Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
-See LICENSE for terms.
+Copyright (c) 2026 JG Systems Consulting Ltd.
+MIT License — see LICENSE.
 -->
 
 # Security Policy
@@ -19,5 +19,5 @@ open a public GitHub issue for security vulnerabilities.
 - An assessment and, where applicable, a remediation plan.
 - Coordinated disclosure once a fix is available.
 
-This is proprietary software; there is no public bug-bounty program. We appreciate responsible
-disclosure and will credit reporters who request it.
+This is open-source software released under the MIT License. There is no paid bug-bounty
+program, but we appreciate responsible disclosure and will credit reporters who request it.

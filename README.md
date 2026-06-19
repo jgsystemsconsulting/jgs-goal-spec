@@ -1,13 +1,13 @@
 <!--
-Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
+Copyright (c) 2026 JG Systems Consulting Ltd. — MIT License (see LICENSE).
 See LICENSE for terms.
 -->
 
 # JGS Goal-to-Spec Kit
 
-![License](https://img.shields.io/badge/license-Proprietary-blue) ![Version](https://img.shields.io/badge/version-1.0.0-green) ![Skills](https://img.shields.io/badge/skills-3-orange) ![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-8A2BE2)
+![License](https://img.shields.io/badge/license-MIT-blue) ![Version](https://img.shields.io/badge/version-1.1.0-green) ![Skills](https://img.shields.io/badge/skills-3-orange) ![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-8A2BE2)
 
-**Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.**
+**Copyright (c) 2026 JG Systems Consulting Ltd. — MIT License (see LICENSE).**
 
 A small, composable suite of Claude Code skills that turn a rough idea into a **hardened
 engineering specification — ready to execute**. Three skills chain together:
@@ -39,10 +39,10 @@ Copy everything in the block below and paste it into your coding agent
 (Claude Code, Cursor, etc.). It will read this repo and install the pack for you.
 
 ```text
-You are installing jgs-goal-spec, a proprietary Claude Code skills pack
+You are installing jgs-goal-spec, an open-source (MIT) Claude Code skills pack
 (JG Systems Consulting Ltd.) that turns a rough idea into a hardened engineering
 spec via three chained skills (goal-formatter → goal-spec → spec-review).
-Repository: https://github.com/jgsystemsconsulting/jgs-goal-spec (version 1.0.0). Do this in order:
+Repository: https://github.com/jgsystemsconsulting/jgs-goal-spec (version 1.1.0). Do this in order:
 
 1. Read README.md, docs/skill-usage.md, and CHANGELOG.md so you understand what
    you are installing. There are NO external prerequisites — these skills call no
@@ -51,7 +51,7 @@ Repository: https://github.com/jgsystemsconsulting/jgs-goal-spec (version 1.0.0)
    (~/.claude/skills/jgs-goal-spec/). If it looks right, run `python install.py`.
 3. Verify: list the installed skills under the target and confirm the count matches SKILLS.md.
 4. Tell me to restart Claude Code, then start with `/goal-formatter`.
-5. This is licensed software — point me at LICENSE. Do not edit anything outside the install target.
+5. This is MIT-licensed open-source software. Do not edit anything outside the install target.
 ```
 
 ---
@@ -152,7 +152,7 @@ vulnerabilities.
 
 ## Legal
 
-This is proprietary software. Use is governed by [LICENSE](LICENSE). Unauthorised copying,
-modification, redistribution, or reverse engineering is strictly prohibited.
+This software is released under the [MIT License](LICENSE) — you are free to use, copy,
+modify, and distribute it, subject to the licence terms.
 
 "JG Systems Consulting" is a trademark of JG Systems Consulting Ltd.

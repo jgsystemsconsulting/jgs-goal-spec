@@ -4,8 +4,8 @@ description: Convert verbal task descriptions into structured, testable goals. U
 compatibility: Git, Python, repo read access, memory files
 ---
 <!--
-Copyright (c) 2026 JG Systems Consulting Ltd. All Rights Reserved.
-See LICENSE for terms.
+Copyright (c) 2026 JG Systems Consulting Ltd.
+MIT License — see LICENSE.
 -->
 
 
