@@ -7,3 +7,6 @@ Thumbs.db
 
 # Visual-QA screenshot artifacts (untracked per UX standard)
 .playwright-mcp/
+
+# Local working notes (not for public distribution)
+PUBLISHING.md
