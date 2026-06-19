@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <!--
   Copyright (c) 2026 JG Systems Consulting Ltd. — MIT License (see LICENSE).
-  Landing page for the JGS Goal-to-Spec Kit. Self-contained, no external assets.
+  Landing page for the JGS Goal-to-Spec Kit. Self-contained: inline CSS, self-hosted
+  fonts under ./fonts/, no third-party CDN or tracking. Aligned to the JG Systems
+  Consulting brand (engineering drafting-document dark aesthetic) — design tokens are
+  the source of truth (see the jgs-website src/styles/tokens.css).
 -->
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JGS Goal-to-Spec Kit — rough idea to a hardened engineering spec</title>
+  <title>JGS Goal-to-Spec Kit — model the work, then build it</title>
   <meta name="description" content="A tool-agnostic suite of three AI agent skills that turn a rough idea into a hardened engineering specification: goal-formatter → goal-spec → spec-review. Works with Claude Code, OpenClaw, Codex, Gemini CLI, Cursor and GitHub Copilot CLI.">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#0a0a0b">
   <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-goal-spec/">
   <meta property="og:title" content="JGS Goal-to-Spec Kit">
   <meta property="og:description" content="Turn a rough idea into a hardened engineering spec — goal-formatter → goal-spec → spec-review. Tool-agnostic agent skills.">
@@ -17,237 +20,360 @@
   <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/">
   <meta name="twitter:card" content="summary_large_image">
   <style>
+/* === SELF-HOSTED FONTS (latin subset) === */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('./fonts/inter-400.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('./fonts/inter-600.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('./fonts/jetbrains-mono-400.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('./fonts/jetbrains-mono-700.woff2') format('woff2'); }
+
+/* === BRAND TOKENS (mirrors jgs-website src/styles/tokens.css) === */
+:root {
+  --ink:      #0a0a0b;
+  --ink-2:    #111113;
+  --ink-3:    #16171a;
+  --ink-4:    #1e2024;
+  --line:     #2a2d33;
+  --line-2:   #3a3e46;
+  --mute:     #6b7078;
+  --mute-2:   #8b9099;
+  --text:     #c7ccd3;
+  --text-hi:  #e8ebf0;
+  --paper:    #f4f2ec;
+  --paper-ink:#0a0a0b;
+
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --pad-x:       clamp(24px, 4vw, 80px);
+  --pad-section: clamp(48px, 6vw, 96px);
+  --content:     1200px;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-[data-theme="dark"] {
-  --bg: #0d1117; --bg-card: #161b22; --bg-code: #1c2128;
-  --border: #30363d; --text: #e6edf3; --text-muted: #8b949e;
-  --accent: #58a6ff; --accent-hover: #79c0ff;
-  --green: #3fb950; --purple: #bc8cff;
-}
-[data-theme="light"] {
-  --bg: #ffffff; --bg-card: #f6f8fa; --bg-code: #f0f3f6;
-  --border: #d0d7de; --text: #1f2328; --text-muted: #656d76;
-  --accent: #0969da; --accent-hover: #0550ae;
-  --green: #1a7f37; --purple: #8250df;
-}
-
+html { -webkit-text-size-adjust: 100%; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden;
-  transition: background 0.3s, color 0.3s;
+  background: var(--ink); color: var(--text);
+  font-family: var(--sans); font-size: 16px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
-a { color: var(--accent); text-decoration: none; }
-a:hover { color: var(--accent-hover); text-decoration: underline; }
-code { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.9em; }
+a { color: inherit; }
 
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--bg); border-bottom: 1px solid var(--border);
-  padding: 12px 24px; display: flex; justify-content: space-between; align-items: center;
-  transition: background 0.3s;
+/* Decorative mono micro-label (masthead / section numbers) */
+.label {
+  font-family: var(--mono); font-size: 0.625rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
 }
-nav .logo { font-weight: 700; font-size: 16px; color: var(--text); }
-nav .logo span { color: var(--accent); }
-nav .nav-right { display: flex; align-items: center; gap: 16px; }
-.theme-btn {
-  background: none; border: 1px solid var(--border); color: var(--text-muted);
-  border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 16px;
-  transition: all 0.2s; line-height: 1;
+.section-no {
+  font-family: var(--mono); font-size: 0.6875rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute);
+  margin: 0 0 40px;
 }
-.theme-btn:hover { color: var(--text); border-color: var(--text-muted); }
+.wrap { max-width: var(--content); margin: 0 auto; padding: 0 var(--pad-x); }
 
-.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-section { padding: 56px 0; border-bottom: 1px solid var(--border); }
-section:last-of-type { border-bottom: none; }
+/* === NAV === */
+header.nav {
+  border-bottom: 1px solid var(--line); background: var(--ink);
+  position: sticky; top: 0; z-index: 50;
+}
+header.nav nav {
+  max-width: var(--content); margin: 0 auto; padding: 0 var(--pad-x);
+  display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+  font-family: var(--mono); font-weight: 700; font-size: 0.75rem;
+  letter-spacing: 0.08em; color: var(--text-hi);
+}
+.brand .slash { color: var(--mute); }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--mute); text-decoration: none; transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text-hi); }
 
-.hero { text-align: center; padding: 80px 0 64px; }
-.hero h1 { font-size: clamp(32px, 6vw, 52px); line-height: 1.1; letter-spacing: -0.02em; }
-.hero h1 .grad {
-  background: linear-gradient(90deg, var(--accent), var(--purple));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero p.lede { font-size: clamp(17px, 2.5vw, 21px); color: var(--text-muted); margin: 20px auto 0; max-width: 620px; }
-.badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 28px 0 0; }
-.badge {
-  font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
-  background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);
-}
-.cta { display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+/* === BUTTONS (square, mono — brand) === */
 .btn {
-  padding: 11px 22px; border-radius: 8px; font-weight: 600; font-size: 15px;
-  border: 1px solid var(--border); transition: all 0.2s;
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+  padding: 12px 24px; text-decoration: none; border: 1px solid; display: inline-block;
+  transition: background 0.15s, border-color 0.15s, color 0.15s; white-space: nowrap;
 }
-.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn.primary:hover { background: var(--accent-hover); text-decoration: none; }
-.btn.ghost { background: var(--bg-card); color: var(--text); }
-.btn.ghost:hover { border-color: var(--text-muted); text-decoration: none; }
+.btn-paper { background: var(--paper); color: var(--paper-ink); border-color: var(--paper); }
+.btn-paper:hover { background: var(--text-hi); border-color: var(--text-hi); }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--text); color: var(--text-hi); }
+.btn-sm { padding: 8px 18px; }
 
-h2 { font-size: 28px; letter-spacing: -0.01em; margin-bottom: 8px; }
-h2 + p.sub { color: var(--text-muted); margin-bottom: 28px; }
+/* === SECTIONS === */
+section { border-bottom: 1px solid var(--line); }
+.pad { padding: var(--pad-section) 0; }
 
-.chain { display: grid; gap: 14px; }
-.step {
-  display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px;
+/* === HERO === */
+.hero { min-height: 86vh; display: flex; align-items: center; }
+.masthead {
+  display: flex; flex-wrap: wrap; gap: 32px; margin-bottom: 48px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--line);
 }
-.step .n {
-  width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 18px; background: var(--bg-code); color: var(--accent); border: 1px solid var(--border);
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+h1.title {
+  font-family: var(--mono); font-weight: 700; font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.14; letter-spacing: -0.02em; color: var(--text-hi); margin: 20px 0 24px;
 }
-.step h3 { font-size: 17px; margin-bottom: 2px; }
-.step h3 code { color: var(--purple); font-weight: 700; }
-.step p { color: var(--text-muted); font-size: 15px; }
-.arrow { text-align: center; color: var(--text-muted); font-size: 20px; line-height: 0.6; }
+.lede { font-size: 1rem; line-height: 1.7; color: var(--mute-2); max-width: 480px; margin-bottom: 36px; }
+.hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
-pre {
-  background: var(--bg-code); border: 1px solid var(--border); border-radius: 10px;
-  padding: 16px 18px; overflow-x: auto; font-size: 13.5px; line-height: 1.7;
+/* Drafting-sheet hero visual */
+.sheet {
+  border: 1px solid var(--line); background: var(--ink-2); aspect-ratio: 4 / 3;
+  position: relative; overflow: hidden; padding: 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
 }
-pre code { color: var(--text); }
-.muted { color: var(--text-muted); }
+.sheet .grid-bg {
+  position: absolute; inset: 0; opacity: 0.3;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.sheet .corner { position: absolute; width: 16px; height: 16px; }
+.sheet .corner.tl { top: 12px; left: 12px; border-top: 1px solid var(--mute); border-left: 1px solid var(--mute); }
+.sheet .corner.tr { top: 12px; right: 12px; border-top: 1px solid var(--mute); border-right: 1px solid var(--mute); }
+.sheet .corner.bl { bottom: 12px; left: 12px; border-bottom: 1px solid var(--mute); border-left: 1px solid var(--mute); }
+.sheet .corner.br { bottom: 12px; right: 12px; border-bottom: 1px solid var(--mute); border-right: 1px solid var(--mute); }
+.sheet .flow { position: relative; display: flex; flex-direction: column; gap: 10px; }
+.sheet .node {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--text-hi); border: 1px solid var(--line-2); background: var(--ink-3);
+  padding: 9px 12px; display: flex; justify-content: space-between; align-items: center;
+}
+.sheet .node span { color: var(--mute); font-weight: 400; font-size: 0.625rem; }
+.sheet .down { font-family: var(--mono); color: var(--mute); font-size: 0.75rem; text-align: center; line-height: 0.5; }
+.sheet .titleblock {
+  position: relative; border-top: 1px solid var(--line); padding-top: 12px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
 
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
-.card h3 { font-size: 16px; margin-bottom: 6px; }
-.card p { color: var(--text-muted); font-size: 14.5px; }
-.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+/* === GRID-OF-CELLS (signature: gap 1px on --line) === */
+.cells { display: grid; gap: 1px; background: var(--line); }
+.cells-3 { grid-template-columns: repeat(3, 1fr); }
+.cells-2 { grid-template-columns: repeat(2, 1fr); }
+.cell { background: var(--ink); padding: 40px 32px; }
+.cell .num { font-family: var(--mono); font-size: 3rem; font-weight: 700; color: var(--line-2); line-height: 1; margin-bottom: 22px; }
+.cell h3 { font-family: var(--mono); font-size: 0.875rem; font-weight: 700; letter-spacing: 0.02em; color: var(--text-hi); margin-bottom: 6px; }
+.cell h3 code { color: var(--text-hi); }
+.cell p { font-size: 0.875rem; line-height: 1.65; color: var(--mute-2); }
+.cell .kicker { font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.1em; color: var(--mute); text-transform: uppercase; margin-bottom: 14px; }
+
+/* === AGENTS === */
+.tags { display: flex; flex-wrap: wrap; gap: 10px; }
 .tag {
-  font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
-  background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
+  padding: 7px 13px; border: 1px solid var(--line-2); color: var(--text);
+  display: inline-flex; align-items: center; gap: 8px;
 }
-.tag.native { border-color: var(--green); color: var(--green); }
-.tag.xform { border-color: var(--accent); color: var(--accent); }
+.tag .dot { width: 6px; height: 6px; display: inline-block; }
+.tag .dot.native { background: var(--paper); }
+.tag .dot.xform { background: var(--mute-2); }
+.legend { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--mute); margin-top: 18px; }
+.legend a { color: var(--text); text-underline-offset: 3px; }
 
-footer { padding: 40px 24px; text-align: center; color: var(--text-muted); font-size: 13px; }
-@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+/* === CODE === */
+pre {
+  font-family: var(--mono); font-size: 0.8125rem; line-height: 1.7;
+  background: var(--ink-2); border: 1px solid var(--line); padding: 18px 20px;
+  overflow-x: auto; color: var(--text);
+}
+pre .c { color: var(--mute); }
+
+/* === PROSE === */
+.prose { max-width: 640px; }
+.prose p { color: var(--mute-2); margin-bottom: 1rem; }
+.prose strong { color: var(--text-hi); font-weight: 600; }
+.prose code, .lede code, .cell code {
+  font-family: var(--mono); font-size: 0.85em; background: var(--ink-3);
+  border: 1px solid var(--line); padding: 1px 5px; color: var(--text-hi);
+}
+
+/* === FOOTER === */
+footer { padding: 40px var(--pad-x); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+footer p { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--mute); }
+footer a { color: var(--mute-2); text-underline-offset: 3px; }
+
+/* === A11Y === */
+:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+::selection { background: var(--text-hi); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* === RESPONSIVE === */
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .sheet { order: -1; aspect-ratio: auto; gap: 28px; }
+  .cells-3, .cells-2 { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
   </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">JGS <span>Goal-to-Spec</span></div>
-    <div class="nav-right">
-      <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec">GitHub</a>
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
-    </div>
-  </nav>
 
-  <header class="hero wrap">
-    <h1>From a rough idea to a<br><span class="grad">hardened engineering spec</span></h1>
-    <p class="lede">A small, composable suite of AI agent skills that chain together to turn what you
-      want into a specification you can <em>trust enough to build from</em>.</p>
-    <div class="badges">
-      <span class="badge">MIT licensed</span>
-      <span class="badge">3 skills</span>
-      <span class="badge">Zero dependencies</span>
-      <span class="badge">Tool-agnostic</span>
-    </div>
-    <div class="cta">
-      <a class="btn primary" href="#install">Install</a>
-      <a class="btn ghost" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">View on GitHub</a>
-    </div>
+  <header class="nav">
+    <nav aria-label="Main">
+      <a class="brand" href="https://jgsystemsconsulting.github.io/jgs-goal-spec/">JGS <span class="slash">/</span> GOAL-SPEC</a>
+      <ul class="nav-links">
+        <li><a href="#chain">THE CHAIN</a></li>
+        <li><a href="#agents">AGENTS</a></li>
+        <li><a href="#install">INSTALL</a></li>
+      </ul>
+      <a class="btn btn-paper btn-sm" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">GITHUB &rarr;</a>
+    </nav>
   </header>
 
-  <section class="wrap" id="chain">
-    <h2>The chain</h2>
-    <p class="sub">Three skills, each independently useful, that hand off through one shared 8-section spec template.</p>
-    <div class="chain">
-      <div class="step">
-        <div class="n">1</div>
-        <div>
-          <h3><code>/goal-formatter</code> — idea → a structured, testable goal</h3>
-          <p>Describe your idea in plain language; get back a measurable end state, success criteria,
-             verification method and constraints. Self-reviews against a rubric before presenting.</p>
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="wrap" style="width:100%; padding-top: var(--pad-section); padding-bottom: var(--pad-section);">
+        <div class="masthead">
+          <span class="label">CLASSIFICATION: OPEN-SOURCE</span>
+          <span class="label">LICENCE: MIT</span>
+          <span class="label">DOC-GS-001</span>
+          <span class="label">REV 1.1.0</span>
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <h2 class="label" style="font-size:0.6875rem; letter-spacing:0.16em;">&sect;01 &mdash; JGS GOAL-TO-SPEC KIT</h2>
+            <h1 class="title">Model the work.<br>Then build it.</h1>
+            <p class="lede">Three composable AI agent skills that turn a rough idea into a
+              <strong style="color:var(--text-hi)">hardened engineering specification</strong> &mdash;
+              one you can trust enough to build from. Tool-agnostic, zero dependencies.</p>
+            <div class="hero-cta">
+              <a class="btn btn-paper" href="#install">INSTALL &rarr;</a>
+              <a class="btn btn-ghost" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">VIEW ON GITHUB</a>
+            </div>
+          </div>
+
+          <!-- Drafting-sheet visual: the chain as a process flow -->
+          <div class="sheet" role="img" aria-label="Process flow: goal-formatter to goal-spec to spec-review to execute">
+            <div class="grid-bg"></div>
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
+            <div class="flow">
+              <div class="node">goal-formatter <span>01 &middot; IDEA</span></div>
+              <div class="down">&darr;</div>
+              <div class="node">goal-spec <span>02 &middot; SPEC</span></div>
+              <div class="down">&darr;</div>
+              <div class="node">spec-review <span>03 &middot; HARDEN</span></div>
+            </div>
+            <div class="titleblock">
+              <div>
+                <p class="label" style="margin-bottom:4px;">PROCESS</p>
+                <p style="font-family:var(--mono); font-size:0.75rem; font-weight:700; color:var(--text-hi); letter-spacing:0.05em;">IDEA &rarr; HARDENED SPEC</p>
+              </div>
+              <div style="text-align:right;">
+                <p class="label" style="font-size:0.5rem;">JG SYSTEMS CONSULTING LTD.</p>
+                <p class="label" style="font-size:0.5rem; color:var(--mute-2);">SHEET 1 OF 1</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="arrow">▼</div>
-      <div class="step">
-        <div class="n">2</div>
-        <div>
-          <h3><code>/goal-spec</code> — goal → a complete spec</h3>
-          <p>Turns the goal into a full engineering spec, asking <em>targeted</em> clarifying questions
-             grounded in what you said you want — resolving every gap before it's done.</p>
+    </section>
+
+    <!-- ===== §02 THE CHAIN ===== -->
+    <section id="chain" class="pad">
+      <div class="wrap">
+        <h2 class="section-no">&sect;02 &mdash; THE CHAIN</h2>
+        <div class="cells cells-3">
+          <div class="cell">
+            <p class="num">01</p>
+            <h3><code>/goal-formatter</code></h3>
+            <p>Describe your idea in plain language; get back a structured, testable goal &mdash;
+               measurable end state, success criteria, verification method. Self-reviews against a rubric.</p>
+          </div>
+          <div class="cell">
+            <p class="num">02</p>
+            <h3><code>/goal-spec</code></h3>
+            <p>Turns the goal into a complete engineering spec, asking targeted clarifying questions
+               grounded in what you said you want &mdash; resolving every gap before it's done.</p>
+          </div>
+          <div class="cell">
+            <p class="num">03</p>
+            <h3><code>/spec-review</code></h3>
+            <p>An autonomous roundtable &mdash; Architect, Security, Test/QA, Operations, Product &mdash;
+               critiques the spec round after round until no critical or major issues remain.</p>
+          </div>
         </div>
       </div>
-      <div class="arrow">▼</div>
-      <div class="step">
-        <div class="n">3</div>
-        <div>
-          <h3><code>/spec-review</code> — spec → a hardened spec</h3>
-          <p>An autonomous roundtable — Architect, Security, Test/QA, Operations, Product — critiques
-             the spec round after round until no critical or major issues remain. No check-ins required.</p>
+    </section>
+
+    <!-- ===== §03 AGENTS ===== -->
+    <section id="agents" class="pad">
+      <div class="wrap">
+        <h2 class="section-no">&sect;03 &mdash; USE IT WITH YOUR AGENT</h2>
+        <div class="cells cells-2">
+          <div class="cell">
+            <p class="kicker">Native &mdash; SKILL.md copied as-is</p>
+            <div class="tags">
+              <span class="tag"><span class="dot native"></span>Claude Code</span>
+              <span class="tag"><span class="dot native"></span>OpenClaw</span>
+              <span class="tag"><span class="dot native"></span>GitHub Copilot CLI</span>
+            </div>
+          </div>
+          <div class="cell">
+            <p class="kicker">Transform &mdash; converted by the installer</p>
+            <div class="tags">
+              <span class="tag"><span class="dot xform"></span>OpenAI Codex CLI</span>
+              <span class="tag"><span class="dot xform"></span>Gemini CLI</span>
+              <span class="tag"><span class="dot xform"></span>Cursor</span>
+            </div>
+          </div>
+        </div>
+        <p class="legend">Pure prompt workflows &mdash; no MCP server, no runtime. Detail:
+          <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/docs/other-agents.md">docs/other-agents.md</a>.</p>
+      </div>
+    </section>
+
+    <!-- ===== §04 INSTALL ===== -->
+    <section id="install" class="pad">
+      <div class="wrap">
+        <h2 class="section-no">&sect;04 &mdash; INSTALL</h2>
+        <div class="cells cells-2">
+          <div class="cell">
+            <p class="kicker">Plugin marketplace &mdash; Claude Code</p>
+<pre>/plugin marketplace add jgsystemsconsulting/jgs-goal-spec
+/plugin install jgs-goal-spec@jgs-goal-spec</pre>
+          </div>
+          <div class="cell">
+            <p class="kicker">Installer script &mdash; any agent</p>
+<pre>python install.py                 <span class="c"># Claude Code (default)</span>
+python install.py --agent gemini  <span class="c"># or codex / cursor /</span>
+                                  <span class="c"># openclaw / copilot</span>
+python install.py --list-agents</pre>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="wrap" id="agents">
-    <h2>Use it with your agent</h2>
-    <p class="sub">Pure prompt workflows — no MCP server, no runtime. Some agents read the skill format
-       natively; others get an automatic format transform from the installer.</p>
-    <div class="tag-row">
-      <span class="tag native">Claude Code</span>
-      <span class="tag native">OpenClaw</span>
-      <span class="tag native">GitHub Copilot CLI</span>
-      <span class="tag xform">OpenAI Codex CLI</span>
-      <span class="tag xform">Gemini CLI</span>
-      <span class="tag xform">Cursor</span>
-    </div>
-    <p class="muted" style="margin-top:14px; font-size:14px;">
-      <span style="color:var(--green)">●</span> native <code>SKILL.md</code> &nbsp;·&nbsp;
-      <span style="color:var(--accent)">●</span> installed via format transform.
-      See <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/docs/other-agents.md">other-agents.md</a>.
-    </p>
-  </section>
-
-  <section class="wrap" id="install">
-    <h2>Install</h2>
-    <p class="sub">Plugin marketplace, or the installer script for any supported agent.</p>
-    <div class="grid2">
-      <div class="card">
-        <h3>Plugin marketplace (Claude Code)</h3>
-        <pre><code>/plugin marketplace add jgsystemsconsulting/jgs-goal-spec
-/plugin install jgs-goal-spec@jgs-goal-spec</code></pre>
+    <!-- ===== §05 THEN EXECUTE ===== -->
+    <section class="pad">
+      <div class="wrap">
+        <h2 class="section-no">&sect;05 &mdash; THEN EXECUTE IT</h2>
+        <div class="prose">
+          <p>The kit's deliverable is a <strong>trustworthy spec, not a running system</strong>. Once
+             <code>spec-review</code> reports convergence, hand the goal + hardened spec to an executor
+             of your choice &mdash; Claude Code's <code>/goal</code>, an autonomous loop, or an executor subagent.</p>
+          <p>The spec's <strong>Success Criteria</strong> are the acceptance gate: the work is done when
+             every criterion is observably met. That's how the loop closes on a built outcome, not just a written one.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Installer script</h3>
-        <pre><code>python install.py                 # Claude Code
-python install.py --agent gemini  # or codex / cursor /
-                                  # openclaw / copilot
-python install.py --list-agents</code></pre>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap" id="execute">
-    <h2>Then execute it</h2>
-    <p class="sub">The kit's deliverable is a trustworthy spec, not a running system.</p>
-    <p>Once <code>spec-review</code> reports convergence, hand the <strong>goal + hardened spec</strong> to
-       an executor of your choice — Claude Code's <code>/goal</code>, an autonomous loop, or an executor
-       subagent. The spec's <strong>Success Criteria</strong> are the acceptance gate: the work is done when
-       every criterion is observably met.</p>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <p>Copyright © 2026 JG Systems Consulting Ltd. · Released under the
-       <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/LICENSE">MIT License</a>.</p>
-    <p style="margin-top:6px;">"JG Systems Consulting" is a trademark of JG Systems Consulting Ltd.</p>
+    <div class="wrap">
+      <p>&copy; 2026 JG SYSTEMS CONSULTING LTD. &middot; <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/LICENSE">MIT LICENSE</a></p>
+      <p>"JG SYSTEMS CONSULTING" IS A TRADEMARK OF JG SYSTEMS CONSULTING LTD.</p>
+    </div>
   </footer>
 
-  <script>
-    const btn = document.getElementById('themeBtn');
-    const root = document.documentElement;
-    function apply(t) { root.setAttribute('data-theme', t); btn.textContent = t === 'dark' ? '🌙' : '☀️'; }
-    try {
-      const saved = localStorage.getItem('jgs-theme');
-      if (saved) apply(saved);
-      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) apply('light');
-    } catch (e) {}
-    btn.addEventListener('click', () => {
-      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      apply(next);
-      try { localStorage.setItem('jgs-theme', next); } catch (e) {}
-    });
-  </script>
 </body>
 </html>
