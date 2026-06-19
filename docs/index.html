@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--
+  Copyright (c) 2026 JG Systems Consulting Ltd. — MIT License (see LICENSE).
+  Landing page for the JGS Goal-to-Spec Kit. Self-contained, no external assets.
+-->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JGS Goal-to-Spec Kit — rough idea to a hardened engineering spec</title>
+  <meta name="description" content="A tool-agnostic suite of three AI agent skills that turn a rough idea into a hardened engineering specification: goal-formatter → goal-spec → spec-review. Works with Claude Code, OpenClaw, Codex, Gemini CLI, Cursor and GitHub Copilot CLI.">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-goal-spec/">
+  <meta property="og:title" content="JGS Goal-to-Spec Kit">
+  <meta property="og:description" content="Turn a rough idea into a hardened engineering spec — goal-formatter → goal-spec → spec-review. Tool-agnostic agent skills.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+[data-theme="dark"] {
+  --bg: #0d1117; --bg-card: #161b22; --bg-code: #1c2128;
+  --border: #30363d; --text: #e6edf3; --text-muted: #8b949e;
+  --accent: #58a6ff; --accent-hover: #79c0ff;
+  --green: #3fb950; --purple: #bc8cff;
+}
+[data-theme="light"] {
+  --bg: #ffffff; --bg-card: #f6f8fa; --bg-code: #f0f3f6;
+  --border: #d0d7de; --text: #1f2328; --text-muted: #656d76;
+  --accent: #0969da; --accent-hover: #0550ae;
+  --green: #1a7f37; --purple: #8250df;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+code { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.9em; }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  padding: 12px 24px; display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.3s;
+}
+nav .logo { font-weight: 700; font-size: 16px; color: var(--text); }
+nav .logo span { color: var(--accent); }
+nav .nav-right { display: flex; align-items: center; gap: 16px; }
+.theme-btn {
+  background: none; border: 1px solid var(--border); color: var(--text-muted);
+  border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 16px;
+  transition: all 0.2s; line-height: 1;
+}
+.theme-btn:hover { color: var(--text); border-color: var(--text-muted); }
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+section:last-of-type { border-bottom: none; }
+
+.hero { text-align: center; padding: 80px 0 64px; }
+.hero h1 { font-size: clamp(32px, 6vw, 52px); line-height: 1.1; letter-spacing: -0.02em; }
+.hero h1 .grad {
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero p.lede { font-size: clamp(17px, 2.5vw, 21px); color: var(--text-muted); margin: 20px auto 0; max-width: 620px; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 28px 0 0; }
+.badge {
+  font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+  background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);
+}
+.cta { display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+.btn {
+  padding: 11px 22px; border-radius: 8px; font-weight: 600; font-size: 15px;
+  border: 1px solid var(--border); transition: all 0.2s;
+}
+.btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn.primary:hover { background: var(--accent-hover); text-decoration: none; }
+.btn.ghost { background: var(--bg-card); color: var(--text); }
+.btn.ghost:hover { border-color: var(--text-muted); text-decoration: none; }
+
+h2 { font-size: 28px; letter-spacing: -0.01em; margin-bottom: 8px; }
+h2 + p.sub { color: var(--text-muted); margin-bottom: 28px; }
+
+.chain { display: grid; gap: 14px; }
+.step {
+  display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px;
+}
+.step .n {
+  width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 18px; background: var(--bg-code); color: var(--accent); border: 1px solid var(--border);
+}
+.step h3 { font-size: 17px; margin-bottom: 2px; }
+.step h3 code { color: var(--purple); font-weight: 700; }
+.step p { color: var(--text-muted); font-size: 15px; }
+.arrow { text-align: center; color: var(--text-muted); font-size: 20px; line-height: 0.6; }
+
+pre {
+  background: var(--bg-code); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 18px; overflow-x: auto; font-size: 13.5px; line-height: 1.7;
+}
+pre code { color: var(--text); }
+.muted { color: var(--text-muted); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.card h3 { font-size: 16px; margin-bottom: 6px; }
+.card p { color: var(--text-muted); font-size: 14.5px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.tag {
+  font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
+  background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+}
+.tag.native { border-color: var(--green); color: var(--green); }
+.tag.xform { border-color: var(--accent); color: var(--accent); }
+
+footer { padding: 40px 24px; text-align: center; color: var(--text-muted); font-size: 13px; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">JGS <span>Goal-to-Spec</span></div>
+    <div class="nav-right">
+      <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec">GitHub</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <header class="hero wrap">
+    <h1>From a rough idea to a<br><span class="grad">hardened engineering spec</span></h1>
+    <p class="lede">A small, composable suite of AI agent skills that chain together to turn what you
+      want into a specification you can <em>trust enough to build from</em>.</p>
+    <div class="badges">
+      <span class="badge">MIT licensed</span>
+      <span class="badge">3 skills</span>
+      <span class="badge">Zero dependencies</span>
+      <span class="badge">Tool-agnostic</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#install">Install</a>
+      <a class="btn ghost" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">View on GitHub</a>
+    </div>
+  </header>
+
+  <section class="wrap" id="chain">
+    <h2>The chain</h2>
+    <p class="sub">Three skills, each independently useful, that hand off through one shared 8-section spec template.</p>
+    <div class="chain">
+      <div class="step">
+        <div class="n">1</div>
+        <div>
+          <h3><code>/goal-formatter</code> — idea → a structured, testable goal</h3>
+          <p>Describe your idea in plain language; get back a measurable end state, success criteria,
+             verification method and constraints. Self-reviews against a rubric before presenting.</p>
+        </div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="step">
+        <div class="n">2</div>
+        <div>
+          <h3><code>/goal-spec</code> — goal → a complete spec</h3>
+          <p>Turns the goal into a full engineering spec, asking <em>targeted</em> clarifying questions
+             grounded in what you said you want — resolving every gap before it's done.</p>
+        </div>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="step">
+        <div class="n">3</div>
+        <div>
+          <h3><code>/spec-review</code> — spec → a hardened spec</h3>
+          <p>An autonomous roundtable — Architect, Security, Test/QA, Operations, Product — critiques
+             the spec round after round until no critical or major issues remain. No check-ins required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="agents">
+    <h2>Use it with your agent</h2>
+    <p class="sub">Pure prompt workflows — no MCP server, no runtime. Some agents read the skill format
+       natively; others get an automatic format transform from the installer.</p>
+    <div class="tag-row">
+      <span class="tag native">Claude Code</span>
+      <span class="tag native">OpenClaw</span>
+      <span class="tag native">GitHub Copilot CLI</span>
+      <span class="tag xform">OpenAI Codex CLI</span>
+      <span class="tag xform">Gemini CLI</span>
+      <span class="tag xform">Cursor</span>
+    </div>
+    <p class="muted" style="margin-top:14px; font-size:14px;">
+      <span style="color:var(--green)">●</span> native <code>SKILL.md</code> &nbsp;·&nbsp;
+      <span style="color:var(--accent)">●</span> installed via format transform.
+      See <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/docs/other-agents.md">other-agents.md</a>.
+    </p>
+  </section>
+
+  <section class="wrap" id="install">
+    <h2>Install</h2>
+    <p class="sub">Plugin marketplace, or the installer script for any supported agent.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Plugin marketplace (Claude Code)</h3>
+        <pre><code>/plugin marketplace add jgsystemsconsulting/jgs-goal-spec
+/plugin install jgs-goal-spec@jgs-goal-spec</code></pre>
+      </div>
+      <div class="card">
+        <h3>Installer script</h3>
+        <pre><code>python install.py                 # Claude Code
+python install.py --agent gemini  # or codex / cursor /
+                                  # openclaw / copilot
+python install.py --list-agents</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="execute">
+    <h2>Then execute it</h2>
+    <p class="sub">The kit's deliverable is a trustworthy spec, not a running system.</p>
+    <p>Once <code>spec-review</code> reports convergence, hand the <strong>goal + hardened spec</strong> to
+       an executor of your choice — Claude Code's <code>/goal</code>, an autonomous loop, or an executor
+       subagent. The spec's <strong>Success Criteria</strong> are the acceptance gate: the work is done when
+       every criterion is observably met.</p>
+  </section>
+
+  <footer>
+    <p>Copyright © 2026 JG Systems Consulting Ltd. · Released under the
+       <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/LICENSE">MIT License</a>.</p>
+    <p style="margin-top:6px;">"JG Systems Consulting" is a trademark of JG Systems Consulting Ltd.</p>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    function apply(t) { root.setAttribute('data-theme', t); btn.textContent = t === 'dark' ? '🌙' : '☀️'; }
+    try {
+      const saved = localStorage.getItem('jgs-theme');
+      if (saved) apply(saved);
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) apply('light');
+    } catch (e) {}
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      apply(next);
+      try { localStorage.setItem('jgs-theme', next); } catch (e) {}
+    });
+  </script>
+</body>
+</html>
