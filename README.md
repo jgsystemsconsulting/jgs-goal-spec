@@ -5,7 +5,7 @@ See LICENSE for terms.
 
 # JGS Goal-to-Spec Kit
 
-![License](https://img.shields.io/badge/license-MIT-blue) ![Version](https://img.shields.io/badge/version-1.3.0-green) ![Skills](https://img.shields.io/badge/skills-3-orange) ![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-8A2BE2)
+![License](https://img.shields.io/badge/license-MIT-blue) ![Version](https://img.shields.io/badge/version-1.3.1-green) ![Skills](https://img.shields.io/badge/skills-3-orange) ![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-8A2BE2)
 
 **Copyright (c) 2026 JG Systems Consulting Ltd. MIT License (see LICENSE).**
 
@@ -131,6 +131,11 @@ python install.py --agent all          # all user-global agents
 Transform targets keep the full workflow: any reference files (e.g. `goal-spec`'s spec template)
 are inlined so each generated prompt is self-contained. Full details, paths, and limitations: see
 [docs/other-agents.md](docs/other-agents.md).
+
+**Cursor plugin (2.5+):** the repo also ships a `.cursor-plugin/` manifest, so Cursor reads the
+`skills/` tree natively through its plugin system. Add the marketplace from the repo, or submit it
+to the [Cursor marketplace](https://cursor.com/marketplace/publish). The installer route above
+(`--agent cursor`, project-local `.cursor/rules/*.mdc`) still works for non-plugin use.
 
 ---
 

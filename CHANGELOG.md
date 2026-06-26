@@ -12,6 +12,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.1] - 2026-06-26
+
+Cursor plugin manifest.
+
+### Added
+- **`.cursor-plugin/` manifest** (`marketplace.json` + `plugin.json`), so Cursor (2.5+) discovers
+  and installs the pack through its plugin system, reading the existing `skills/` tree natively.
+  Satisfies the Cursor arm of RR-B-29 (in-host plugin manifest per targeted host).
+- README documents the Cursor plugin route alongside the existing `--agent cursor` installer path.
+
 ## [1.3.0] - 2026-06-26
 
 Website expansion and release-standard alignment.

@@ -1,0 +1,14 @@
+{
+  "name": "jgs-goal-spec",
+  "owner": { "name": "JG Systems Consulting Ltd." },
+  "metadata": {
+    "description": "JG Systems Consulting goal-to-spec skills: turn a rough idea into a hardened engineering spec."
+  },
+  "plugins": [
+    {
+      "name": "jgs-goal-spec",
+      "source": ".",
+      "description": "goal-formatter -> goal-spec -> spec-review skills pack"
+    }
+  ]
+}
