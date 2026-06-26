@@ -1,6 +1,6 @@
 <!--
 Copyright (c) 2026 JG Systems Consulting Ltd.
-MIT License — see LICENSE.
+MIT License (see LICENSE).
 -->
 
 # Security Policy
@@ -10,8 +10,13 @@ MIT License — see LICENSE.
 If you discover a security issue in this software, please report it **privately**. Do **not**
 open a public GitHub issue for security vulnerabilities.
 
-- **Email:** support@jgsystemsconsulting.com
-- Include: a description, reproduction steps, and the affected version (see `RELEASE-INFO.txt`).
+Use either route:
+
+- **Private security advisory (preferred):** open one at
+  [Security → Advisories → Report a vulnerability](https://github.com/jgsystemsconsulting/jgs-goal-spec/security/advisories/new).
+- **Pull request with the fix:** for low-sensitivity issues, open a PR directly.
+
+Include a description, reproduction steps, and the affected version (see `RELEASE-INFO.txt`).
 
 ## What to expect
 

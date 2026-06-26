@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--
+  Copyright (c) 2026 JG Systems Consulting Ltd. MIT License (see LICENSE).
+  Usage walkthrough for the JGS Goal-to-Spec Kit. Self-contained: inline CSS, self-hosted
+  fonts under ./fonts/, no third-party CDN or tracking. Content mirrors docs/skill-usage.md;
+  design tokens match index.html (one brand).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usage: chain the goal-to-spec skills and execute the result | JGS</title>
+  <meta name="description" content="Step by step: run the three JGS skills in order, hand the hardened spec to an executor, and close the loop on a built outcome against its success criteria.">
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" href="./logo.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-goal-spec/usage.html">
+  <meta property="og:title" content="JGS Goal-to-Spec Kit: usage walkthrough">
+  <meta property="og:description" content="Run the three skills in order, then execute the hardened spec against its success criteria.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/usage.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('./fonts/inter-400.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('./fonts/inter-600.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('./fonts/jetbrains-mono-400.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('./fonts/jetbrains-mono-700.woff2') format('woff2'); }
+
+:root {
+  --ink: #0a0a0b; --ink-2: #111113; --ink-3: #16171a; --ink-4: #1e2024;
+  --line: #2a2d33; --line-2: #3a3e46; --mute: #6b7078; --mute-2: #8b9099;
+  --text: #c7ccd3; --text-hi: #e8ebf0; --paper: #f4f2ec; --paper-ink: #0a0a0b;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --pad-x: clamp(24px, 4vw, 80px); --pad-section: clamp(48px, 6vw, 96px); --content: 1200px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--ink); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+.label { font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); }
+.wrap { max-width: var(--content); margin: 0 auto; padding: 0 var(--pad-x); }
+
+header.nav { border-bottom: 1px solid var(--line); background: var(--ink); position: sticky; top: 0; z-index: 50; }
+header.nav nav { max-width: var(--content); margin: 0 auto; padding: 0 var(--pad-x); display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--mono); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-hi); }
+.brand .slash { color: var(--mute); }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { font-family: var(--mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--mute); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--text-hi); }
+
+.btn { font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; padding: 12px 24px; text-decoration: none; border: 1px solid; display: inline-block; transition: background 0.15s, border-color 0.15s, color 0.15s; white-space: nowrap; }
+.btn-paper { background: var(--paper); color: var(--paper-ink); border-color: var(--paper); }
+.btn-paper:hover { background: var(--text-hi); border-color: var(--text-hi); }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--text); color: var(--text-hi); }
+.btn-sm { padding: 8px 18px; }
+
+.page-head { padding: var(--pad-section) 0; border-bottom: 1px solid var(--line); }
+.page-head .masthead { display: flex; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+h1.title { font-family: var(--mono); font-weight: 700; font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.16; letter-spacing: -0.02em; color: var(--text-hi); margin: 16px 0 20px; }
+.lede { font-size: 1rem; line-height: 1.7; color: var(--mute-2); max-width: 620px; }
+.lede a { color: var(--text-hi); }
+
+section { border-bottom: 1px solid var(--line); }
+.pad { padding: var(--pad-section) 0; }
+.section-no { font-family: var(--mono); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); margin: 0 0 28px; }
+
+/* numbered steps */
+.step { display: grid; grid-template-columns: 56px 1fr; gap: 28px; margin-bottom: 40px; }
+.step:last-child { margin-bottom: 0; }
+.step .n { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--line-2); line-height: 1; }
+.step h3 { font-family: var(--mono); font-size: 0.95rem; font-weight: 700; color: var(--text-hi); margin-bottom: 8px; }
+.step h3 code { color: var(--text-hi); }
+.step p { color: var(--mute-2); max-width: 720px; margin-bottom: 0.75rem; }
+.step strong { color: var(--text-hi); font-weight: 600; }
+.prose { max-width: 720px; }
+.prose p { color: var(--mute-2); margin-bottom: 1rem; }
+.prose strong { color: var(--text-hi); font-weight: 600; }
+code, .step code, .prose code { font-family: var(--mono); font-size: 0.85em; background: var(--ink-3); border: 1px solid var(--line); padding: 1px 5px; color: var(--text-hi); }
+
+.note { border-left: 2px solid var(--line-2); background: var(--ink-2); padding: 16px 20px; margin: 24px 0; }
+.note p { color: var(--mute-2); margin: 0; }
+.note .k { font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); display: block; margin-bottom: 6px; }
+
+ul.tips { list-style: none; max-width: 720px; }
+ul.tips li { padding-left: 18px; position: relative; margin-bottom: 12px; color: var(--mute-2); }
+ul.tips li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 6px; height: 1px; background: var(--line-2); }
+
+footer { padding: 40px var(--pad-x); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 0; }
+footer p { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--mute); }
+footer a { color: var(--mute-2); text-underline-offset: 3px; }
+
+:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+::selection { background: var(--text-hi); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .step { grid-template-columns: 1fr; gap: 10px; }
+}
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <nav aria-label="Main">
+      <a class="brand" href="./index.html">JGS <span class="slash">/</span> GOAL-SPEC</a>
+      <ul class="nav-links">
+        <li><a href="./index.html">HOME</a></li>
+        <li><a href="./skills.html">SKILLS</a></li>
+        <li><a href="./usage.html" aria-current="page">USAGE</a></li>
+        <li><a href="./index.html#install">INSTALL</a></li>
+      </ul>
+      <a class="btn btn-paper btn-sm" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">GITHUB &rarr;</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <div class="wrap">
+        <div class="masthead">
+          <span class="label">DOC-GS-003</span>
+          <span class="label">USAGE WALKTHROUGH</span>
+        </div>
+        <h2 class="label" style="font-size:0.6875rem; letter-spacing:0.16em;">&sect;B &middot; USAGE</h2>
+        <h1 class="title">Run the chain.<br>Then close the loop.</h1>
+        <p class="lede">A skill is a reusable workflow your agent loads from a local file. You invoke it
+          explicitly by typing <code>/&lt;skill-name&gt;</code>, or implicitly when its description matches your
+          request. Here is how the three run together, and how the hardened spec turns into a built outcome.
+          For the per-skill detail, see the <a href="./skills.html">skills reference</a>.</p>
+      </div>
+    </div>
+
+    <!-- ===== run the chain ===== -->
+    <section class="pad">
+      <div class="wrap">
+        <h2 class="section-no">&sect;B1 &middot; RUN THE THREE IN ORDER</h2>
+
+        <div class="step">
+          <div class="n">1</div>
+          <div>
+            <h3><code>/goal-formatter</code></h3>
+            <p>Describe your idea in plain language. You get back a structured, testable goal: measurable
+               end state, success criteria, verification method. Add <code>"and a spec"</code> to also get a
+               draft specification, with anything undecided marked as a <code>[GAP]</code>.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="n">2</div>
+          <div>
+            <h3><code>/goal-spec</code></h3>
+            <p>Turn that goal into a <strong>complete</strong> engineering spec. It asks you targeted
+               clarifying questions for anything the goal left undecided, grounded in what you said you
+               want, then resolves every gap (by asking, or by recording a sensible-default assumption).</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="n">3</div>
+          <div>
+            <h3><code>/spec-review</code></h3>
+            <p>Harden the spec <strong>autonomously</strong>. A roundtable of engineering-discipline
+               reviewers (Architect, Security, Test/QA, Operations, Product) critiques it round after round
+               until no critical or major issues remain, with no check-ins required. You get the converged
+               spec plus a round-by-round summary.</p>
+          </div>
+        </div>
+
+        <div class="note">
+          <span class="k">No subagents?</span>
+          <p>If your client does not support subagents, spec-review can run the personas inline (one model
+             voicing each discipline). That is faster, but with less genuine independence between reviewers.</p>
+        </div>
+
+        <p class="prose" style="margin-top:28px;">The three share one <strong>8-section engineering spec
+           template</strong> (Problem &amp; Context, Scope, Requirements, Constraints, Design Approach, Success
+           Criteria, Risks &amp; Mitigations, Open Questions), so handoffs line up with no renamed sections.</p>
+      </div>
+    </section>
+
+    <!-- ===== execute ===== -->
+    <section class="pad">
+      <div class="wrap">
+        <h2 class="section-no">&sect;B2 &middot; THEN EXECUTE IT</h2>
+        <div class="prose">
+          <p>The kit's deliverable is a <strong>trustworthy spec</strong>, not a running system. Authoring
+             ends at convergence; execution is a separate, deliberate step you perform with whatever executor
+             you like:</p>
+        </div>
+        <ul class="tips">
+          <li><strong>Claude Code <code>/goal</code>:</strong> paste the goal; point it at the hardened spec
+              as the detailed design.</li>
+          <li><strong>An autonomous loop</strong> (autopilot or ralph-style runner): feed it the spec as the
+              source of truth and let it build to the spec's Success Criteria.</li>
+          <li><strong>An <code>executor</code> subagent:</strong> dispatch with the spec inline, then verify
+              the output against the spec's Success Criteria and Verification section.</li>
+        </ul>
+        <p class="prose" style="margin-top:20px;">The spec's <strong>Success Criteria</strong> are the
+           acceptance gate: the work is done when every criterion is observably met. Run the executor, check
+           against those criteria, iterate if any fail. That is how the loop closes on a built outcome, not
+           just a written one.</p>
+      </div>
+    </section>
+
+    <!-- ===== tips ===== -->
+    <section class="pad">
+      <div class="wrap">
+        <h2 class="section-no">&sect;B3 &middot; TIPS</h2>
+        <ul class="tips">
+          <li>Run the three in order for a brand-new effort; jump in at <code>goal-spec</code> if you already
+              have a goal, or at <code>spec-review</code> if you already have a spec.</li>
+          <li>Keep the spec file on disk between steps so each skill can read and revise the same artifact.</li>
+          <li>For high-stakes specs, read spec-review's round-by-round summary and the autonomous decisions it
+              made on your Open Questions before you execute. That is where it filled gaps for you.</li>
+        </ul>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:36px;">
+          <a class="btn btn-paper" href="./index.html#install">INSTALL THE KIT &rarr;</a>
+          <a class="btn btn-ghost" href="./skills.html">SKILLS REFERENCE</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 JG SYSTEMS CONSULTING LTD. &middot; <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/LICENSE">MIT LICENSE</a> &middot; <a href="./index.html">HOME</a> &middot; <a href="./skills.html">SKILLS</a></p>
+      <p>"JG SYSTEMS CONSULTING" IS A TRADEMARK OF JG SYSTEMS CONSULTING LTD.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--
+  Copyright (c) 2026 JG Systems Consulting Ltd. MIT License (see LICENSE).
+  Skills reference page for the JGS Goal-to-Spec Kit. Self-contained: inline CSS, self-hosted
+  fonts under ./fonts/, no third-party CDN or tracking. Content mirrors each skill's SKILL.md
+  frontmatter and "When to use" section; design tokens match index.html (one brand).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills reference: goal-formatter, goal-spec, spec-review | JGS</title>
+  <meta name="description" content="Reference for the three JGS Goal-to-Spec skills: what goal-formatter, goal-spec and spec-review each do, when to use them, and how to invoke them.">
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" href="./logo.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-goal-spec/skills.html">
+  <meta property="og:title" content="JGS Goal-to-Spec Kit: skills reference">
+  <meta property="og:description" content="What each of the three skills does, when to use it, and how to invoke it. goal-formatter, goal-spec, spec-review.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/skills.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('./fonts/inter-400.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('./fonts/inter-600.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('./fonts/jetbrains-mono-400.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('./fonts/jetbrains-mono-700.woff2') format('woff2'); }
+
+:root {
+  --ink: #0a0a0b; --ink-2: #111113; --ink-3: #16171a; --ink-4: #1e2024;
+  --line: #2a2d33; --line-2: #3a3e46; --mute: #6b7078; --mute-2: #8b9099;
+  --text: #c7ccd3; --text-hi: #e8ebf0; --paper: #f4f2ec; --paper-ink: #0a0a0b;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --pad-x: clamp(24px, 4vw, 80px); --pad-section: clamp(48px, 6vw, 96px); --content: 1200px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--ink); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+.label { font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); }
+.section-no { font-family: var(--mono); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); margin: 0 0 40px; }
+.wrap { max-width: var(--content); margin: 0 auto; padding: 0 var(--pad-x); }
+
+header.nav { border-bottom: 1px solid var(--line); background: var(--ink); position: sticky; top: 0; z-index: 50; }
+header.nav nav { max-width: var(--content); margin: 0 auto; padding: 0 var(--pad-x); display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--mono); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-hi); }
+.brand .slash { color: var(--mute); }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { font-family: var(--mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--mute); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--text-hi); }
+
+.btn { font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; padding: 12px 24px; text-decoration: none; border: 1px solid; display: inline-block; transition: background 0.15s, border-color 0.15s, color 0.15s; white-space: nowrap; }
+.btn-paper { background: var(--paper); color: var(--paper-ink); border-color: var(--paper); }
+.btn-paper:hover { background: var(--text-hi); border-color: var(--text-hi); }
+.btn-sm { padding: 8px 18px; }
+
+section { border-bottom: 1px solid var(--line); }
+.pad { padding: var(--pad-section) 0; }
+
+.page-head { padding: var(--pad-section) 0; border-bottom: 1px solid var(--line); }
+.page-head .masthead { display: flex; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+h1.title { font-family: var(--mono); font-weight: 700; font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.16; letter-spacing: -0.02em; color: var(--text-hi); margin: 16px 0 20px; }
+.lede { font-size: 1rem; line-height: 1.7; color: var(--mute-2); max-width: 620px; }
+.lede a { color: var(--text-hi); }
+
+/* skill record card */
+.skill { display: grid; grid-template-columns: 88px 1fr; gap: 40px; padding: var(--pad-section) 0; border-bottom: 1px solid var(--line); }
+.skill:last-child { border-bottom: 0; }
+.skill .idx { font-family: var(--mono); font-size: 3rem; font-weight: 700; color: var(--line-2); line-height: 1; }
+.skill h2 { font-family: var(--mono); font-size: 1.125rem; font-weight: 700; letter-spacing: 0.01em; color: var(--text-hi); margin-bottom: 6px; }
+.skill h2 code { color: var(--text-hi); }
+.skill .role { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 20px; }
+.skill p { color: var(--mute-2); margin-bottom: 1rem; max-width: 720px; }
+.skill strong { color: var(--text-hi); font-weight: 600; }
+.skill .field { margin-top: 24px; }
+.skill .field .k { font-family: var(--mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; }
+.skill ul { list-style: none; }
+.skill li { padding-left: 18px; position: relative; margin-bottom: 8px; color: var(--mute-2); }
+.skill li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 6px; height: 1px; background: var(--line-2); }
+code, .skill code { font-family: var(--mono); font-size: 0.85em; background: var(--ink-3); border: 1px solid var(--line); padding: 1px 5px; color: var(--text-hi); }
+.cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+
+footer { padding: 40px var(--pad-x); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 0; }
+footer p { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--mute); }
+footer a { color: var(--mute-2); text-underline-offset: 3px; }
+
+:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+::selection { background: var(--text-hi); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .skill { grid-template-columns: 1fr; gap: 16px; }
+  .skill .idx { font-size: 2rem; }
+}
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <nav aria-label="Main">
+      <a class="brand" href="./index.html">JGS <span class="slash">/</span> GOAL-SPEC</a>
+      <ul class="nav-links">
+        <li><a href="./index.html">HOME</a></li>
+        <li><a href="./skills.html" aria-current="page">SKILLS</a></li>
+        <li><a href="./usage.html">USAGE</a></li>
+        <li><a href="./index.html#install">INSTALL</a></li>
+      </ul>
+      <a class="btn btn-paper btn-sm" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">GITHUB &rarr;</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <div class="wrap">
+        <div class="masthead">
+          <span class="label">DOC-GS-002</span>
+          <span class="label">SKILLS REFERENCE</span>
+          <span class="label">3 SKILLS</span>
+        </div>
+        <h2 class="label" style="font-size:0.6875rem; letter-spacing:0.16em;">&sect;A &middot; SKILLS REFERENCE</h2>
+        <h1 class="title">Three skills, one chain.</h1>
+        <p class="lede">Each skill is independently useful and they hand off cleanly, because all three
+          share one 8-section engineering spec template. Run them in order for a brand-new effort, or
+          jump in wherever you already have a goal or a spec. New here? Start with the
+          <a href="./usage.html">step-by-step walkthrough</a>.</p>
+      </div>
+    </div>
+
+    <section class="wrap" aria-label="Skills">
+
+      <!-- ===== goal-formatter ===== -->
+      <article class="skill">
+        <div class="idx">01</div>
+        <div>
+          <h2><code>/goal-formatter</code></h2>
+          <p class="role">Idea &rarr; structured, testable goal</p>
+          <p>Describe your idea in plain language and get back a <strong>structured, testable goal</strong>:
+             a measurable end state, success criteria, a verification method, constraints, and a
+             test-coverage shape. It self-reviews the draft against a quality rubric and revises before
+             it shows you anything, so the goal you receive has already been checked for testability.</p>
+          <p>Add a spec-style ask (<code>"and a spec"</code>, <code>"spec this out"</code>) and it also
+             emits a <strong>draft</strong> 8-section spec, marking anything the description does not
+             determine as <code>[GAP]</code> for goal-spec to resolve.</p>
+          <div class="field">
+            <p class="k">When to use it</p>
+            <ul>
+              <li>"Write me a goal for X" or "create a goal for X".</li>
+              <li>You want to frame loose work as a measurable objective before building.</li>
+              <li>You want a draft spec to hand straight to goal-spec.</li>
+            </ul>
+          </div>
+          <div class="field">
+            <p class="k">Invoke</p>
+            <p><code>/goal-formatter</code> in Claude Code, or the equivalent for your agent
+               (see the <a href="./usage.html" style="color:var(--text-hi);">usage page</a>).</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== goal-spec ===== -->
+      <article class="skill">
+        <div class="idx">02</div>
+        <div>
+          <h2><code>/goal-spec</code></h2>
+          <p class="role">Goal &rarr; complete engineering spec</p>
+          <p>Takes the goal (or a goal plus draft spec) and produces a <strong>complete</strong> engineering
+             specification across all eight sections. Its defining behaviour: it <strong>asks you gap-filling
+             clarifying questions</strong> grounded in what you said you wanted, so each question reads as
+             "to satisfy your goal of X, which of these?" rather than a generic survey.</p>
+          <p>It resolves every gap by asking, or by recording a sensible-default assumption, then
+             self-reviews the spec against a quality rubric: success criteria must be numeric with a named
+             test method, every requirement testable, no unstated assumptions.</p>
+          <div class="field">
+            <p class="k">When to use it</p>
+            <ul>
+              <li>"Spec this goal", "flesh out the spec", "define the specification".</li>
+              <li>You have a goal that needs to become an implementable design.</li>
+              <li>You have a draft spec with gaps that need resolving.</li>
+            </ul>
+          </div>
+          <div class="field">
+            <p class="k">Pairs with</p>
+            <p><code>goal-formatter</code> (upstream) and <code>spec-review</code> (downstream).</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== spec-review ===== -->
+      <article class="skill">
+        <div class="idx">03</div>
+        <div>
+          <h2><code>/spec-review</code></h2>
+          <p class="role">Spec &rarr; hardened spec (autonomous)</p>
+          <p>Hardens the spec <strong>autonomously</strong>. Each round spawns a roundtable of independent
+             engineering-discipline reviewers (Architect, Security, Test/QA, Operations, Product) as separate
+             subagents that critique the spec from their own expertise. The orchestrator triages findings,
+             revises the spec in place, and loops until no CRITICAL or MAJOR findings remain (hard cap: 6
+             rounds). There are <strong>no user checkpoints</strong>: you get the converged spec and a
+             round-by-round summary at the end.</p>
+          <p>The personas are domain-adaptive: Security and Operations auto-remap for physical products,
+             data/ML, or process specs, so you do not hand-map them in the invocation. If your client has no
+             subagents, it can run the personas inline (one model voicing each), faster but less independent.</p>
+          <div class="field">
+            <p class="k">When to use it</p>
+            <ul>
+              <li>"Review this spec", "harden this spec", "run the roundtable on this spec".</li>
+              <li>You want a spec battle-tested before implementation.</li>
+            </ul>
+          </div>
+          <div class="field">
+            <p class="k">Exit artifact</p>
+            <p>A ready-to-run <code>/goal</code> execution prompt that hands the goal plus hardened spec to
+               an executor of your choice. Self-contained, with no dependency on any other skill.</p>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-paper btn-sm" href="./index.html#install">INSTALL THE KIT &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 JG SYSTEMS CONSULTING LTD. &middot; <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/LICENSE">MIT LICENSE</a> &middot; <a href="./index.html">HOME</a> &middot; <a href="./usage.html">USAGE</a></p>
+      <p>"JG SYSTEMS CONSULTING" IS A TRADEMARK OF JG SYSTEMS CONSULTING LTD.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

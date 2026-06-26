@@ -1,7 +1,7 @@
 {
   "name": "jgs-goal-spec",
   "description": "Turn a rough idea into a hardened engineering spec: goal-formatter -> goal-spec -> spec-review. Tool-agnostic Claude Code skills.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": { "name": "JG Systems Consulting Ltd." },
   "homepage": "https://github.com/jgsystemsconsulting/jgs-goal-spec",
   "repository": "https://github.com/jgsystemsconsulting/jgs-goal-spec",

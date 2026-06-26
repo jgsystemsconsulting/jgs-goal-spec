@@ -1,6 +1,6 @@
 <!--
 Copyright (c) 2026 JG Systems Consulting Ltd.
-MIT License — see LICENSE.
+MIT License (see LICENSE).
 -->
 # Contributing to jgs-goal-spec
 
@@ -10,17 +10,17 @@ Claude Code skills (`goal-formatter` → `goal-spec` → `spec-review`), release
 
 ## Ways to contribute
 
-- **Report a bug or rough edge** — open an issue describing what you tried, what you expected,
+- **Report a bug or rough edge**: open an issue describing what you tried, what you expected,
   and what happened. Skill behaviour is prompt-driven, so a copy of the invocation and the
   result is the most useful thing you can include.
-- **Suggest an improvement** — open an issue first to discuss the idea before a large change.
-- **Submit a fix** — small, focused pull requests are easiest to review.
+- **Suggest an improvement**: open an issue first to discuss the idea before a large change.
+- **Submit a fix**: small, focused pull requests are easiest to review.
 
 ## Making a change
 
 1. Fork the repo and create a branch (`git switch -c fix/short-description`).
 2. Edit the relevant `skills/<skill>/SKILL.md` (or docs). Keep each skill's `## When to use`
-   heading and a clear description — the CI check (`.github/workflows/validate.yml`) enforces
+   heading and a clear description; the CI check (`.github/workflows/validate.yml`) enforces
    valid frontmatter (`name` matching the directory, non-empty `description`).
 3. Keep changes scoped. A PR that touches one skill is easier to reason about than one that
    rewrites several.
@@ -35,7 +35,7 @@ executes repository code. It checks:
 - Every `skills/*/SKILL.md` has valid frontmatter (kebab-case `name` matching its folder,
   non-empty `description`).
 
-If CI is red, read the job log — the failing check names the file and the reason.
+If CI is red, read the job log; the failing check names the file and the reason.
 
 ## Code of conduct
 

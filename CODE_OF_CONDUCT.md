@@ -1,6 +1,6 @@
 <!--
 Copyright (c) 2026 JG Systems Consulting Ltd.
-MIT License — see LICENSE.
+MIT License (see LICENSE).
 -->
 # Code of Conduct
 

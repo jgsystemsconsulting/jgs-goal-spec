@@ -1,11 +1,11 @@
 ---
 name: goal-formatter
-description: Convert verbal task descriptions into structured, testable goals. Use when you say "write me a goal", "create a goal for X", or want to frame work as a measurable objective. Analyzes repo state (git history, technical debt, memory, code) to synthesize clear goals with success criteria, verification methods, and test coverage outlines, then SELF-REVIEWS the draft against a quality rubric and revises before presenting. Optionally also emits a draft engineering specification alongside the goal (spec mode) for handoff to the goal-spec and spec-review skills. Model-agnostic — works with any LLM or agent framework.
+description: Convert verbal task descriptions into structured, testable goals. Use when you say "write me a goal", "create a goal for X", or want to frame work as a measurable objective. Analyzes repo state (git history, technical debt, memory, code) to synthesize clear goals with success criteria, verification methods, and test coverage outlines, then SELF-REVIEWS the draft against a quality rubric and revises before presenting. Optionally also emits a draft engineering specification alongside the goal (spec mode) for handoff to the goal-spec and spec-review skills. Model-agnostic: works with any LLM or agent framework.
 compatibility: Git, Python, repo read access, memory files
 ---
 <!--
 Copyright (c) 2026 JG Systems Consulting Ltd.
-MIT License — see LICENSE.
+MIT License (see LICENSE).
 -->
 
 

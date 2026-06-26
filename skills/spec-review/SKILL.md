@@ -1,11 +1,11 @@
 ---
 name: spec-review
-description: Autonomously harden an engineering specification through a roundtable of independent engineering-discipline reviewers (architecture, security, test/QA, operations, product). Each reviewer is a real subagent thinking independently; the orchestrator collects findings, revises the spec itself, and loops until convergence (no CRITICAL or MAJOR findings) with NO user checkpoints. Use when you say "review this spec", "harden this spec", "spec review", "run the roundtable on this spec", or want a spec battle-tested before implementation. Self-contained — no dependency on any other skill.
+description: Autonomously harden an engineering specification through a roundtable of independent engineering-discipline reviewers (architecture, security, test/QA, operations, product). Each reviewer is a real subagent thinking independently; the orchestrator collects findings, revises the spec itself, and loops until convergence (no CRITICAL or MAJOR findings) with NO user checkpoints. Use when you say "review this spec", "harden this spec", "spec review", "run the roundtable on this spec", or want a spec battle-tested before implementation. Self-contained, with no dependency on any other skill.
 compatibility: Agent tool (spawns reviewer subagents), file read/write for the spec + triage log
 ---
 <!--
 Copyright (c) 2026 JG Systems Consulting Ltd.
-MIT License — see LICENSE.
+MIT License (see LICENSE).
 -->
 
 

@@ -1,11 +1,11 @@
 <!--
 Copyright (c) 2026 JG Systems Consulting Ltd.
-MIT License — see LICENSE.
+MIT License (see LICENSE).
 -->
 
 # Using the kit with other agents
 
-The three skills are pure prompt-engineering workflows — no MCP server, no external
+The three skills are pure prompt-engineering workflows: no MCP server, no external
 runtime, no Claude-specific API. They ship in Claude Code's `SKILL.md` format, which
 **several agents read natively** and others can consume after a small format transform.
 `install.py` handles both: pick a target with `--agent`.
@@ -28,12 +28,12 @@ python install.py --agent <name> --dry-run --force --uninstall   # the usual fla
 | Gemini CLI | `gemini` | `~/.gemini/commands/jgs-goal-spec/<skill>.toml` | TOML (`prompt = """…"""`) | `/jgs-goal-spec:goal-formatter` (run `/commands reload`) |
 | Cursor | `cursor` | `./.cursor/rules/<skill>.mdc` **(project-local)** | `.mdc` rule + frontmatter | `@goal-formatter`, or auto-applied by rule description |
 
-### Native SKILL.md agents — `claude`, `openclaw`, `copilot`
+### Native SKILL.md agents: `claude`, `openclaw`, `copilot`
 These read the `SKILL.md` format directly, so the installer copies each skill folder
-unchanged — references and all. This is the richest experience; the multi-file skill
+unchanged, references and all. This is the richest experience; the multi-file skill
 (`goal-spec`, which carries a spec template under `references/`) works in full.
 
-### Transform agents — `codex`, `gemini`, `cursor`
+### Transform agents: `codex`, `gemini`, `cursor`
 These use prompt/rule conventions rather than skills, so the installer converts each
 `SKILL.md` into the agent's format. To keep the result self-contained, any
 `references/` files are **inlined into the prompt as an appendix** (so `goal-spec`'s

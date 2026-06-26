@@ -5,7 +5,7 @@ compatibility: Git, repo read access, AskUserQuestion (for clarifying questions)
 ---
 <!--
 Copyright (c) 2026 JG Systems Consulting Ltd.
-MIT License — see LICENSE.
+MIT License (see LICENSE).
 -->
 
 

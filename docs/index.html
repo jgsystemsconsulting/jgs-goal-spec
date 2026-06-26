@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <!--
-  Copyright (c) 2026 JG Systems Consulting Ltd. — MIT License (see LICENSE).
+  Copyright (c) 2026 JG Systems Consulting Ltd. MIT License (see LICENSE).
   Landing page for the JGS Goal-to-Spec Kit. Self-contained: inline CSS, self-hosted
   fonts under ./fonts/, no third-party CDN or tracking. Aligned to the JG Systems
-  Consulting brand (engineering drafting-document dark aesthetic) — design tokens are
+  Consulting brand (engineering drafting-document dark aesthetic); design tokens are
   the source of truth (see the jgs-website src/styles/tokens.css).
 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JGS Goal-to-Spec Kit — model the work, then build it</title>
-  <meta name="description" content="A tool-agnostic suite of three AI agent skills that turn a rough idea into a hardened engineering specification: goal-formatter → goal-spec → spec-review. Works with Claude Code, OpenClaw, Codex, Gemini CLI, Cursor and GitHub Copilot CLI.">
+  <title>JGS Goal-to-Spec Kit: model the work, then build it</title>
+  <meta name="description" content="Three tool-agnostic AI agent skills that turn a rough idea into a hardened engineering spec: goal-formatter, goal-spec, spec-review. Works with any agent.">
   <meta name="theme-color" content="#0a0a0b">
   <link rel="icon" href="./logo.svg" type="image/svg+xml">
   <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-goal-spec/">
   <meta property="og:title" content="JGS Goal-to-Spec Kit">
-  <meta property="og:description" content="Turn a rough idea into a hardened engineering spec — goal-formatter → goal-spec → spec-review. Tool-agnostic agent skills.">
+  <meta property="og:description" content="Turn a rough idea into a hardened engineering spec: goal-formatter → goal-spec → spec-review. Tool-agnostic agent skills.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/">
   <meta name="twitter:card" content="summary_large_image">
@@ -94,7 +94,7 @@ header.nav nav {
 }
 .nav-links a:hover { color: var(--text-hi); }
 
-/* === BUTTONS (square, mono — brand) === */
+/* === BUTTONS (square, mono, brand) === */
 .btn {
   font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
   padding: 12px 24px; text-decoration: none; border: 1px solid; display: inline-block;
@@ -221,7 +221,8 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
       <a class="brand" href="https://jgsystemsconsulting.github.io/jgs-goal-spec/">JGS <span class="slash">/</span> GOAL-SPEC</a>
       <ul class="nav-links">
         <li><a href="#chain">THE CHAIN</a></li>
-        <li><a href="#agents">AGENTS</a></li>
+        <li><a href="./skills.html">SKILLS</a></li>
+        <li><a href="./usage.html">USAGE</a></li>
         <li><a href="#install">INSTALL</a></li>
       </ul>
       <a class="btn btn-paper btn-sm" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">GITHUB &rarr;</a>
@@ -236,15 +237,15 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
           <span class="label">CLASSIFICATION: OPEN-SOURCE</span>
           <span class="label">LICENCE: MIT</span>
           <span class="label">DOC-GS-001</span>
-          <span class="label">REV 1.2.0</span>
+          <span class="label">REV 1.3.0</span>
         </div>
 
         <div class="hero-grid">
           <div>
-            <h2 class="label" style="font-size:0.6875rem; letter-spacing:0.16em;">&sect;01 &mdash; JGS GOAL-TO-SPEC KIT</h2>
+            <h2 class="label" style="font-size:0.6875rem; letter-spacing:0.16em;">&sect;01 &middot; JGS GOAL-TO-SPEC KIT</h2>
             <h1 class="title">Model the work.<br>Then build it.</h1>
             <p class="lede">Three composable AI agent skills that turn a rough idea into a
-              <strong style="color:var(--text-hi)">hardened engineering specification</strong> &mdash;
+              <strong style="color:var(--text-hi)">hardened engineering specification</strong>,
               one you can trust enough to build from. Tool-agnostic, zero dependencies.</p>
             <div class="hero-cta">
               <a class="btn btn-paper" href="#install">INSTALL &rarr;</a>
@@ -282,24 +283,28 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
     <!-- ===== §02 THE CHAIN ===== -->
     <section id="chain" class="pad">
       <div class="wrap">
-        <h2 class="section-no">&sect;02 &mdash; THE CHAIN</h2>
+        <h2 class="section-no">&sect;02 &middot; THE CHAIN</h2>
+        <p class="lede" style="margin-bottom:36px;">Three skills, run in order. Full reference on the
+          <a href="./skills.html" style="color:var(--text-hi); text-underline-offset:3px;">skills page</a>;
+          the step-by-step walkthrough is on the
+          <a href="./usage.html" style="color:var(--text-hi); text-underline-offset:3px;">usage page</a>.</p>
         <div class="cells cells-3">
           <div class="cell">
             <p class="num">01</p>
             <h3><code>/goal-formatter</code></h3>
-            <p>Describe your idea in plain language; get back a structured, testable goal &mdash;
+            <p>Describe your idea in plain language; get back a structured, testable goal:
                measurable end state, success criteria, verification method. Self-reviews against a rubric.</p>
           </div>
           <div class="cell">
             <p class="num">02</p>
             <h3><code>/goal-spec</code></h3>
             <p>Turns the goal into a complete engineering spec, asking targeted clarifying questions
-               grounded in what you said you want &mdash; resolving every gap before it's done.</p>
+               grounded in what you said you want, resolving every gap before it's done.</p>
           </div>
           <div class="cell">
             <p class="num">03</p>
             <h3><code>/spec-review</code></h3>
-            <p>An autonomous roundtable &mdash; Architect, Security, Test/QA, Operations, Product &mdash;
+            <p>An autonomous roundtable (Architect, Security, Test/QA, Operations, Product)
                critiques the spec round after round until no critical or major issues remain.</p>
           </div>
         </div>
@@ -309,10 +314,10 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
     <!-- ===== §03 AGENTS ===== -->
     <section id="agents" class="pad">
       <div class="wrap">
-        <h2 class="section-no">&sect;03 &mdash; USE IT WITH YOUR AGENT</h2>
+        <h2 class="section-no">&sect;03 &middot; USE IT WITH YOUR AGENT</h2>
         <div class="cells cells-2">
           <div class="cell">
-            <p class="kicker">Native &mdash; SKILL.md copied as-is</p>
+            <p class="kicker">Native &middot; SKILL.md copied as-is</p>
             <div class="tags">
               <span class="tag"><span class="dot native"></span>Claude Code</span>
               <span class="tag"><span class="dot native"></span>OpenClaw</span>
@@ -320,7 +325,7 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
             </div>
           </div>
           <div class="cell">
-            <p class="kicker">Transform &mdash; converted by the installer</p>
+            <p class="kicker">Transform &middot; converted by the installer</p>
             <div class="tags">
               <span class="tag"><span class="dot xform"></span>OpenAI Codex CLI</span>
               <span class="tag"><span class="dot xform"></span>Gemini CLI</span>
@@ -328,7 +333,7 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
             </div>
           </div>
         </div>
-        <p class="legend">Pure prompt workflows &mdash; no MCP server, no runtime. Detail:
+        <p class="legend">Pure prompt workflows: no MCP server, no runtime. Detail:
           <a href="https://github.com/jgsystemsconsulting/jgs-goal-spec/blob/main/docs/other-agents.md">docs/other-agents.md</a>.</p>
       </div>
     </section>
@@ -336,15 +341,15 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
     <!-- ===== §04 INSTALL ===== -->
     <section id="install" class="pad">
       <div class="wrap">
-        <h2 class="section-no">&sect;04 &mdash; INSTALL</h2>
+        <h2 class="section-no">&sect;04 &middot; INSTALL</h2>
         <div class="cells cells-2">
           <div class="cell">
-            <p class="kicker">Plugin marketplace &mdash; Claude Code</p>
+            <p class="kicker">Plugin marketplace &middot; Claude Code</p>
 <pre>/plugin marketplace add jgsystemsconsulting/jgs-goal-spec
 /plugin install jgs-goal-spec@jgs-goal-spec</pre>
           </div>
           <div class="cell">
-            <p class="kicker">Installer script &mdash; any agent</p>
+            <p class="kicker">Installer script &middot; any agent</p>
 <pre>python install.py                 <span class="c"># Claude Code (default)</span>
 python install.py --agent gemini  <span class="c"># or codex / cursor /</span>
                                   <span class="c"># openclaw / copilot</span>
@@ -357,11 +362,11 @@ python install.py --list-agents</pre>
     <!-- ===== §05 THEN EXECUTE ===== -->
     <section class="pad">
       <div class="wrap">
-        <h2 class="section-no">&sect;05 &mdash; THEN EXECUTE IT</h2>
+        <h2 class="section-no">&sect;05 &middot; THEN EXECUTE IT</h2>
         <div class="prose">
           <p>The kit's deliverable is a <strong>trustworthy spec, not a running system</strong>. Once
              <code>spec-review</code> reports convergence, hand the goal + hardened spec to an executor
-             of your choice &mdash; Claude Code's <code>/goal</code>, an autonomous loop, or an executor subagent.</p>
+             of your choice: Claude Code's <code>/goal</code>, an autonomous loop, or an executor subagent.</p>
           <p>The spec's <strong>Success Criteria</strong> are the acceptance gate: the work is done when
              every criterion is observably met. That's how the loop closes on a built outcome, not just a written one.</p>
         </div>
