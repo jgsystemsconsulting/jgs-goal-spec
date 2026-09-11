@@ -15,5 +15,13 @@ PUBLISHING.md
 jgs-logo-*.png
 jgs-logo-*.jpg
 jgs-logo-*.gif
+# Superpowers pipeline artifacts (never commit)
 .superpowers/
 docs/superpowers/
+brainstorms/
+
+# graphify scratch + volatile build state
+graphify-out/
+.planning/graphs/.rebuild.lock
+.planning/graphs/.last-build-status.json
+.planning/graphs/.last-build-snapshot.json
