@@ -197,36 +197,36 @@
       "file_type": "rationale",
       "source_file": "install.py",
       "source_location": "L117",
-      "id": "install_rationale_117",
       "community": 1,
-      "norm_label": "return (name, description, body) from a skill.md file.      frontmatter is a min"
+      "norm_label": "return (name, description, body) from a skill.md file.      frontmatter is a min",
+      "id": "install_rationale_117"
     },
     {
       "label": "Inline any references/ files so transform targets stay self-contained.",
       "file_type": "rationale",
       "source_file": "install.py",
       "source_location": "L145",
-      "id": "install_rationale_145",
       "community": 1,
-      "norm_label": "inline any references/ files so transform targets stay self-contained."
+      "norm_label": "inline any references/ files so transform targets stay self-contained.",
+      "id": "install_rationale_145"
     },
     {
       "label": "Escape a string for a TOML basic (double-quoted) value.",
       "file_type": "rationale",
       "source_file": "install.py",
       "source_location": "L157",
-      "id": "install_rationale_157",
       "community": 2,
-      "norm_label": "escape a string for a toml basic (double-quoted) value."
+      "norm_label": "escape a string for a toml basic (double-quoted) value.",
+      "id": "install_rationale_157"
     },
     {
       "label": "Return (relative_path, file_contents) for a transform agent.",
       "file_type": "rationale",
       "source_file": "install.py",
       "source_location": "L162",
-      "id": "install_rationale_162",
       "community": 2,
-      "norm_label": "return (relative_path, file_contents) for a transform agent."
+      "norm_label": "return (relative_path, file_contents) for a transform agent.",
+      "id": "install_rationale_162"
     }
   ],
   "links": [
