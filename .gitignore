@@ -25,3 +25,6 @@ graphify-out/
 .planning/graphs/.rebuild.lock
 .planning/graphs/.last-build-status.json
 .planning/graphs/.last-build-snapshot.json
+
+# graphify knowledge graph kept local-only (public repo)
+.planning/
