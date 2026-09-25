@@ -19,7 +19,13 @@
   <meta property="og:description" content="Turn a rough idea into a hardened engineering spec: goal-formatter → goal-spec → spec-review. Tool-agnostic agent skills.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/">
+  <meta property="og:image" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/title-card.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta property="og:image:alt" content="JGS Goal-to-Spec Kit skill overview card: goal-formatter, goal-spec, spec-review.">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jgsystemsconsulting.github.io/jgs-goal-spec/title-card.png">
+  <meta name="twitter:image:alt" content="JGS Goal-to-Spec Kit skill overview card: goal-formatter, goal-spec, spec-review.">
   <style>
 /* === SELF-HOSTED FONTS (latin subset) === */
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('./fonts/inter-400.woff2') format('woff2'); }
@@ -124,33 +130,10 @@ h1.title {
 .lede { font-size: 1rem; line-height: 1.7; color: var(--mute-2); max-width: 480px; margin-bottom: 36px; }
 .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
-/* Drafting-sheet hero visual */
-.sheet {
-  border: 1px solid var(--line); background: var(--ink-2); aspect-ratio: 4 / 3;
-  position: relative; overflow: hidden; padding: 24px;
-  display: flex; flex-direction: column; justify-content: space-between;
-}
-.sheet .grid-bg {
-  position: absolute; inset: 0; opacity: 0.3;
-  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-.sheet .corner { position: absolute; width: 16px; height: 16px; }
-.sheet .corner.tl { top: 12px; left: 12px; border-top: 1px solid var(--mute); border-left: 1px solid var(--mute); }
-.sheet .corner.tr { top: 12px; right: 12px; border-top: 1px solid var(--mute); border-right: 1px solid var(--mute); }
-.sheet .corner.bl { bottom: 12px; left: 12px; border-bottom: 1px solid var(--mute); border-left: 1px solid var(--mute); }
-.sheet .corner.br { bottom: 12px; right: 12px; border-bottom: 1px solid var(--mute); border-right: 1px solid var(--mute); }
-.sheet .flow { position: relative; display: flex; flex-direction: column; gap: 10px; }
-.sheet .node {
-  font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em;
-  color: var(--text-hi); border: 1px solid var(--line-2); background: var(--ink-3);
-  padding: 9px 12px; display: flex; justify-content: space-between; align-items: center;
-}
-.sheet .node span { color: var(--mute); font-weight: 400; font-size: 0.625rem; }
-.sheet .down { font-family: var(--mono); color: var(--mute); font-size: 0.75rem; text-align: center; line-height: 0.5; }
-.sheet .titleblock {
-  position: relative; border-top: 1px solid var(--line); padding-top: 12px;
-  display: flex; justify-content: space-between; align-items: flex-end;
+/* Skill-overview title card (hero media column) */
+.hero-card {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--line); border-radius: 2px;
 }
 
 /* === GRID-OF-CELLS (signature: gap 1px on --line) === */
@@ -208,7 +191,7 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
 /* === RESPONSIVE === */
 @media (max-width: 860px) {
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .sheet { order: -1; aspect-ratio: auto; gap: 28px; }
+  .hero-card { order: -1; }
   .cells-3, .cells-2 { grid-template-columns: 1fr; }
   .nav-links { display: none; }
 }
@@ -253,29 +236,10 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
             </div>
           </div>
 
-          <!-- Drafting-sheet visual: the chain as a process flow -->
-          <div class="sheet" role="img" aria-label="Process flow: goal-formatter to goal-spec to spec-review to execute">
-            <div class="grid-bg"></div>
-            <span class="corner tl"></span><span class="corner tr"></span>
-            <span class="corner bl"></span><span class="corner br"></span>
-            <div class="flow">
-              <div class="node">goal-formatter <span>01 &middot; IDEA</span></div>
-              <div class="down">&darr;</div>
-              <div class="node">goal-spec <span>02 &middot; SPEC</span></div>
-              <div class="down">&darr;</div>
-              <div class="node">spec-review <span>03 &middot; HARDEN</span></div>
-            </div>
-            <div class="titleblock">
-              <div>
-                <p class="label" style="margin-bottom:4px;">PROCESS</p>
-                <p style="font-family:var(--mono); font-size:0.75rem; font-weight:700; color:var(--text-hi); letter-spacing:0.05em;">IDEA &rarr; HARDENED SPEC</p>
-              </div>
-              <div style="text-align:right;">
-                <p class="label" style="font-size:0.5rem;">JG SYSTEMS CONSULTING LTD.</p>
-                <p class="label" style="font-size:0.5rem; color:var(--mute-2);">SHEET 1 OF 1</p>
-              </div>
-            </div>
-          </div>
+          <!-- Skill-overview title card (docs/title-card.png) -->
+          <img class="hero-card" src="./title-card.png" width="1280" height="720"
+               alt="Skill overview card: JGS Goal-to-Spec Kit runs goal-formatter, then goal-spec, then spec-review, turning a rough idea into a hardened engineering spec; QR code links to the GitHub repo.">
+
         </div>
       </div>
     </section>
