@@ -112,6 +112,13 @@ header.nav nav {
 .btn-ghost { background: transparent; color: var(--text); border-color: var(--line); }
 .btn-ghost:hover { border-color: var(--text); color: var(--text-hi); }
 .btn-sm { padding: 8px 18px; }
+button.btn { cursor: pointer; }
+.btn-copy { background: transparent; color: var(--text); border-color: var(--line); }
+.btn-copy:hover { border-color: var(--text); color: var(--text-hi); }
+.install-fallback { flex-basis: 100%; min-width: 0; }
+.install-fallback summary { cursor: pointer; margin-top: 2px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text); }
+.install-fallback pre { margin-top: 14px; white-space: pre-wrap; max-height: 24rem; }
+.copy-status { align-self: center; font-family: var(--mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; color: var(--text-hi); }
 
 /* === SECTIONS === */
 section { border-bottom: 1px solid var(--line); }
@@ -235,6 +242,24 @@ footer a { color: var(--mute-2); text-underline-offset: 3px; }
             <div class="hero-cta">
               <a class="btn btn-paper" href="#install">INSTALL &rarr;</a>
               <a class="btn btn-ghost" href="https://github.com/jgsystemsconsulting/jgs-goal-spec">VIEW ON GITHUB</a>
+              <button type="button" class="btn btn-copy" id="install-copy">COPY INSTALL PROMPT</button>
+              <span class="copy-status" aria-live="polite"></span>
+              <details class="install-fallback">
+                <summary>Install AI agent</summary>
+                <pre id="install-prompt">You installing jgs-goal-spec, open-source (MIT) Claude Code skills pack
+(JG Systems Consulting Ltd.) turns rough idea into hardened engineering
+spec via three chained skills (goal-formatter &rarr; goal-spec &rarr; spec-review).
+Repository: https://github.com/jgsystemsconsulting/jgs-goal-spec (version 1.2.0). Do this in order:
+
+1. Read README.md, docs/skill-usage.md, and CHANGELOG.md so understand
+you installing. NO external prerequisites; skills call no
+MCP server and need no licence tier runtime.
+2. Run `python install.py --dry-run` and show me skill list and target
+(~/.claude/skills/jgs-goal-spec/). looks right, run `python install.py`.
+3. Verify: list installed skills under target and confirm count matches SKILLS.md.
+4. Tell me restart Claude Code, `/goal-formatter`.
+5. MIT-licensed open-source software. Do not edit anything outside install target.</pre>
+              </details>
             </div>
           </div>
 
@@ -347,5 +372,41 @@ python install.py --list-agents</pre>
     </div>
   </footer>
 
+<script>
+(function () {
+  var btn = document.getElementById("install-copy");
+  var pre = document.getElementById("install-prompt");
+  var live = document.querySelector(".copy-status");
+  if (!btn || !pre || !live) return;
+  function report(ok) {
+    live.textContent = ok ? "Copied" : "Copy failed. Select the text below.";
+    if (!ok) {
+      var box = pre.closest("details");
+      if (box) box.open = true;
+    }
+  }
+  function legacy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  btn.addEventListener("click", function () {
+    var text = pre.textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { report(true); }, function () { report(legacy(text)); });
+    } else {
+      report(legacy(text));
+    }
+  });
+})();
+</script>
 </body>
 </html>
